@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.CreatedDate;
 
 import com.emrecan.appointmentsystem.core.entities.IEntity;
 import com.emrecan.appointmentsystem.entities.enums.Status;
@@ -46,8 +45,10 @@ public class Appointment implements IEntity {
 	@Column(name = "Status")
 	private Status status = Status.WAITING;
 	
+	@Column(name = "Note")
+	private String note;
+	
 	@Column(name = "CreatedAt")
-	@CreatedDate
 	private final Date createdAt = Date.valueOf(LocalDate.now());
 	
 	@Column(name = "IsDeleted")
