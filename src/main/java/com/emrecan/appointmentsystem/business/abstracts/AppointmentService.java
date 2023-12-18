@@ -11,8 +11,8 @@ public interface AppointmentService {
 	DataResult<Appointment> getByAppointmentId(String appointmentId);
 	DataResult<List<Appointment>> getAll();//
 	DataResult<List<Appointment>> getAllDeletedAppointments();//
-	DataResult<List<Appointment>> getAllDeletedAppointmentsByStaff();//
-	DataResult<List<Appointment>> getAllDeletedAppointmentsByCustomer();//
+	DataResult<List<Appointment>> getAllDeletedAppointmentsByStaff(String staffId);//
+	DataResult<List<Appointment>> getAllDeletedAppointmentsByCustomer(String customerId);//
 	DataResult<List<Appointment>> getAllWaitingAppointments();//
 	DataResult<List<Appointment>> getAllAcceptedAppointments();//
 	DataResult<List<Appointment>> getAllDeclinedAppointments();//
@@ -27,5 +27,8 @@ public interface AppointmentService {
 	Result add(Appointment appointment);
 	Result update(Appointment appointment);
 	Result delete(Appointment appointment);
+	Result setStatusAccepted(Appointment appointment);
+	Result setStatusDeclined(Appointment appointment);
+	Result setStatusWaiting(Appointment appointment);
 	
 }

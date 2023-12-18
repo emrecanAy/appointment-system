@@ -37,20 +37,17 @@ public class AppointmentManager implements AppointmentService{
 
 	@Override
 	public DataResult<List<Appointment>> getAllDeletedAppointments() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SuccessDataResult<List<Appointment>>(this._appointmentDao.getAllAppointmentsByIsDeleted(true), Messages.EntitiesListed);
 	}
 
 	@Override
-	public DataResult<List<Appointment>> getAllDeletedAppointmentsByStaff() {
-		// TODO Auto-generated method stub
-		return null;
+	public DataResult<List<Appointment>> getAllDeletedAppointmentsByStaff(String staffId) {
+		return new SuccessDataResult<List<Appointment>>(this._appointmentDao.getAllAppointmentsByStaffIdAndIsDeletedTrue(staffId), Messages.EntitiesListed);
 	}
 
 	@Override
-	public DataResult<List<Appointment>> getAllDeletedAppointmentsByCustomer() {
-		// TODO Auto-generated method stub
-		return null;
+	public DataResult<List<Appointment>> getAllDeletedAppointmentsByCustomer(String customerId) {
+		return new SuccessDataResult<List<Appointment>>(this._appointmentDao.getAllAppointmentsByCustomerIdAndIsDeletedTrue(customerId), Messages.EntitiesListed);
 	}
 
 	@Override
@@ -126,6 +123,27 @@ public class AppointmentManager implements AppointmentService{
 		this._appointmentDao.save(appointment);
 		return new SuccessResult(Messages.EntityDeleted);
 		
+	}
+
+	@Override
+	public Result setStatusAccepted(Appointment appointment) {
+		appointment.setStatus(Status.ACCEPTED);
+		this._appointmentDao.save(appointment);
+		return new SuccessResult(Messages.EntityUpdated);
+	}
+
+	@Override
+	public Result setStatusDeclined(Appointment appointment) {
+		appointment.setStatus(Status.DECLINED);
+		this._appointmentDao.save(appointment);
+		return new SuccessResult(Messages.EntityUpdated);
+	}
+
+	@Override
+	public Result setStatusWaiting(Appointment appointment) {
+		appointment.setStatus(Status.WAITING);
+		this._appointmentDao.save(appointment);
+		return new SuccessResult(Messages.EntityUpdated);
 	}
 
 	

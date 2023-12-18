@@ -190,5 +190,36 @@ public class AppointmentsController {
 		}
 	}
 	
+	@PutMapping("/setstatusaccepted")
+	public ResponseEntity<Result> setStatusAccepted(@RequestBody Appointment appointment) {
+		Result result = this._appointmentService.setStatusAccepted(appointment); 
+		if(result.isSuccess()) {
+			return new ResponseEntity<Result>(result, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@PutMapping("/setstatuswaiting")
+	public ResponseEntity<Result> setStatusWaiting(@RequestBody Appointment appointment) {
+		Result result = this._appointmentService.setStatusWaiting(appointment); 
+		if(result.isSuccess()) {
+			return new ResponseEntity<Result>(result, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@PutMapping("/setstatusdeclined")
+	public ResponseEntity<Result> setStatusDeclined(@RequestBody Appointment appointment) {
+		Result result = this._appointmentService.setStatusDeclined(appointment); 
+		if(result.isSuccess()) {
+			return new ResponseEntity<Result>(result, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
 	
 }
