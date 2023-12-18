@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emrecan.appointmentsystem.business.abstracts.AppointmentService;
+import com.emrecan.appointmentsystem.business.requests.appointment.CreateAppointmentRequest;
+import com.emrecan.appointmentsystem.business.requests.appointment.DeleteAppointmentRequest;
+import com.emrecan.appointmentsystem.business.requests.appointment.SetAppointmentStatusRequest;
+import com.emrecan.appointmentsystem.business.requests.appointment.UpdateAppointmentRequest;
+import com.emrecan.appointmentsystem.business.responses.appointment.GetAllAppointmentsResponse;
+import com.emrecan.appointmentsystem.business.responses.appointment.GetAppointmentResponse;
 import com.emrecan.appointmentsystem.core.utilities.results.DataResult;
 import com.emrecan.appointmentsystem.core.utilities.results.Result;
 import com.emrecan.appointmentsystem.entities.Appointment;
@@ -31,138 +37,138 @@ public class AppointmentsController {
 	}
 	
 	@GetMapping("/getall")
-	public ResponseEntity<DataResult<List<Appointment>>> getAll(){
-		DataResult<List<Appointment>> staffs = this._appointmentService.getAll(); 
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAll(){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAll(); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getallwaiting")
-	public ResponseEntity<DataResult<List<Appointment>>> getAllWaitingAppointments(){
-		DataResult<List<Appointment>> staffs = this._appointmentService.getAllWaitingAppointments(); 
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllWaitingAppointments(){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAllWaitingAppointments(); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getallwaiting/staff/{staffId}")
-	public ResponseEntity<DataResult<List<Appointment>>> getAllWaitingAppointmentsByStaff(@PathVariable(name = "staffId") String staffId){
-		DataResult<List<Appointment>> staffs = this._appointmentService.getAllWaitingAppointmentsByStaff(staffId); 
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllWaitingAppointmentsByStaff(@PathVariable(name = "staffId") String staffId){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAllWaitingAppointmentsByStaff(staffId); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getallwaiting/customer/{customerId}")
-	public ResponseEntity<DataResult<List<Appointment>>> getAllWaitingAppointmentsByCustomer(@PathVariable(name = "customerId") String customerId){
-		DataResult<List<Appointment>> staffs = this._appointmentService.getAllWaitingAppointmentsByCustomer(customerId); 
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllWaitingAppointmentsByCustomer(@PathVariable(name = "customerId") String customerId){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAllWaitingAppointmentsByCustomer(customerId); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getallaccepted/")
-	public ResponseEntity<DataResult<List<Appointment>>> getAllAcceptedAppointments(){
-		DataResult<List<Appointment>> staffs = this._appointmentService.getAllAcceptedAppointments(); 
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllAcceptedAppointments(){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAllAcceptedAppointments(); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getallaccepted/{staffId}")
-	public ResponseEntity<DataResult<List<Appointment>>> getAllAcceptedAppointmentsByStaff(@PathVariable(name = "staffId") String staffId){
-		DataResult<List<Appointment>> staffs = this._appointmentService.getAllAcceptedAppointmentsByStaff(staffId); 
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllAcceptedAppointmentsByStaff(@PathVariable(name = "staffId") String staffId){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAllAcceptedAppointmentsByStaff(staffId); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getallaccepted/customer/{customerId}")
-	public ResponseEntity<DataResult<List<Appointment>>> getAllAcceptedAppointmentsByCustomer(@PathVariable(name = "customerId") String customerId){
-		DataResult<List<Appointment>> staffs = this._appointmentService.getAllAcceptedAppointmentsByCustomer(customerId); 
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllAcceptedAppointmentsByCustomer(@PathVariable(name = "customerId") String customerId){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAllAcceptedAppointmentsByCustomer(customerId); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getalldeclined")
-	public ResponseEntity<DataResult<List<Appointment>>> getAllDeclinedAppointments(){
-		DataResult<List<Appointment>> staffs = this._appointmentService.getAllDeclinedAppointments(); 
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllDeclinedAppointments(){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAllDeclinedAppointments(); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getalldeclined/{staffId}")
-	public ResponseEntity<DataResult<List<Appointment>>> getAllDeclinedAppointmentsByStaff(@PathVariable(name = "staffId") String staffId){
-		DataResult<List<Appointment>> staffs = this._appointmentService.getAllDeclinedAppointmentsByStaff(staffId); 
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllDeclinedAppointmentsByStaff(@PathVariable(name = "staffId") String staffId){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAllDeclinedAppointmentsByStaff(staffId); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getalldeclined/customer/{customerId}")
-	public ResponseEntity<DataResult<List<Appointment>>> getAllDeclinedAppointmentsByCustomer(@PathVariable(name = "customerId") String customerId){
-		DataResult<List<Appointment>> staffs = this._appointmentService.getAllDeclinedAppointmentsByCustomer(customerId); 
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllDeclinedAppointmentsByCustomer(@PathVariable(name = "customerId") String customerId){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAllDeclinedAppointmentsByCustomer(customerId); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/{appointmentId}")
-	public ResponseEntity<DataResult<Appointment>> getById(@PathVariable(name = "appointmentId") String appointmentId) {
-		DataResult<Appointment> appointment = this._appointmentService.getByAppointmentId(appointmentId);
+	public ResponseEntity<DataResult<GetAppointmentResponse>> getById(@PathVariable(name = "appointmentId") String appointmentId) {
+		DataResult<GetAppointmentResponse> appointment = this._appointmentService.getByAppointmentId(appointmentId);
 		if(appointment.isSuccess()) {
-			return new ResponseEntity<DataResult<Appointment>>(appointment, HttpStatus.OK);
+			return new ResponseEntity<DataResult<GetAppointmentResponse>>(appointment, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<Appointment>>(appointment, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<GetAppointmentResponse>>(appointment, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/staff/{staffId}")
-	public ResponseEntity<DataResult<List<Appointment>>> getAllByStaff(@PathVariable(name = "staffId") String staffId) {
-		DataResult<List<Appointment>> appointment = this._appointmentService.getAllByStaff(staffId);
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllByStaff(@PathVariable(name = "staffId") String staffId) {
+		DataResult<List<GetAllAppointmentsResponse>> appointment = this._appointmentService.getAllByStaff(staffId);
 		if(appointment.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(appointment, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(appointment, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(appointment, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(appointment, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/customer/{customerId}")
-	public ResponseEntity<DataResult<List<Appointment>>> getAllByCustomer(@PathVariable(name = "customerId") String customerId) {
-		DataResult<List<Appointment>> appointment = this._appointmentService.getAllByCustomer(customerId);
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllByCustomer(@PathVariable(name = "customerId") String customerId) {
+		DataResult<List<GetAllAppointmentsResponse>> appointment = this._appointmentService.getAllByCustomer(customerId);
 		if(appointment.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Appointment>>>(appointment, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(appointment, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Appointment>>>(appointment, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>>(appointment, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<Result> add(@RequestBody Appointment appointment) {
-		Result result = this._appointmentService.add(appointment); 
+	public ResponseEntity<Result> add(@RequestBody CreateAppointmentRequest createAppointmentRequest) {
+		Result result = this._appointmentService.add(createAppointmentRequest); 
 		if(result.isSuccess()) {
 			return new ResponseEntity<Result>(result, HttpStatus.OK);
 		}else {
@@ -171,8 +177,8 @@ public class AppointmentsController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<Result> update(@RequestBody Appointment appointment) {
-		Result result = this._appointmentService.update(appointment); 
+	public ResponseEntity<Result> update(@RequestBody UpdateAppointmentRequest updateAppointmentRequest) {
+		Result result = this._appointmentService.update(updateAppointmentRequest); 
 		if(result.isSuccess()) {
 			return new ResponseEntity<Result>(result, HttpStatus.OK);
 		}else {
@@ -181,8 +187,8 @@ public class AppointmentsController {
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<Result> delete(@RequestBody Appointment appointment) {
-		Result result = this._appointmentService.delete(appointment); 
+	public ResponseEntity<Result> delete(@RequestBody DeleteAppointmentRequest deleteAppointmentRequest) {
+		Result result = this._appointmentService.delete(deleteAppointmentRequest); 
 		if(result.isSuccess()) {
 			return new ResponseEntity<Result>(result, HttpStatus.OK);
 		}else {
@@ -191,8 +197,8 @@ public class AppointmentsController {
 	}
 	
 	@PutMapping("/setstatusaccepted")
-	public ResponseEntity<Result> setStatusAccepted(@RequestBody Appointment appointment) {
-		Result result = this._appointmentService.setStatusAccepted(appointment); 
+	public ResponseEntity<Result> setStatusAccepted(@RequestBody SetAppointmentStatusRequest setAppointmentStatusRequest) {
+		Result result = this._appointmentService.setStatusAccepted(setAppointmentStatusRequest); 
 		if(result.isSuccess()) {
 			return new ResponseEntity<Result>(result, HttpStatus.OK);
 		}else {
@@ -201,8 +207,8 @@ public class AppointmentsController {
 	}
 	
 	@PutMapping("/setstatuswaiting")
-	public ResponseEntity<Result> setStatusWaiting(@RequestBody Appointment appointment) {
-		Result result = this._appointmentService.setStatusWaiting(appointment); 
+	public ResponseEntity<Result> setStatusWaiting(@RequestBody SetAppointmentStatusRequest setAppointmentStatusRequest) {
+		Result result = this._appointmentService.setStatusWaiting(setAppointmentStatusRequest); 
 		if(result.isSuccess()) {
 			return new ResponseEntity<Result>(result, HttpStatus.OK);
 		}else {
@@ -211,8 +217,8 @@ public class AppointmentsController {
 	}
 	
 	@PutMapping("/setstatusdeclined")
-	public ResponseEntity<Result> setStatusDeclined(@RequestBody Appointment appointment) {
-		Result result = this._appointmentService.setStatusDeclined(appointment); 
+	public ResponseEntity<Result> setStatusDeclined(@RequestBody SetAppointmentStatusRequest setAppointmentStatusRequest) {
+		Result result = this._appointmentService.setStatusDeclined(setAppointmentStatusRequest); 
 		if(result.isSuccess()) {
 			return new ResponseEntity<Result>(result, HttpStatus.OK);
 		}else {

@@ -2,33 +2,38 @@ package com.emrecan.appointmentsystem.business.abstracts;
 
 import java.util.List;
 
+import com.emrecan.appointmentsystem.business.requests.appointment.CreateAppointmentRequest;
+import com.emrecan.appointmentsystem.business.requests.appointment.DeleteAppointmentRequest;
+import com.emrecan.appointmentsystem.business.requests.appointment.SetAppointmentStatusRequest;
+import com.emrecan.appointmentsystem.business.requests.appointment.UpdateAppointmentRequest;
+import com.emrecan.appointmentsystem.business.responses.appointment.GetAllAppointmentsResponse;
+import com.emrecan.appointmentsystem.business.responses.appointment.GetAppointmentResponse;
 import com.emrecan.appointmentsystem.core.utilities.results.DataResult;
 import com.emrecan.appointmentsystem.core.utilities.results.Result;
-import com.emrecan.appointmentsystem.entities.Appointment;
 
 public interface AppointmentService {
 
-	DataResult<Appointment> getByAppointmentId(String appointmentId);
-	DataResult<List<Appointment>> getAll();//
-	DataResult<List<Appointment>> getAllDeletedAppointments();//
-	DataResult<List<Appointment>> getAllDeletedAppointmentsByStaff(String staffId);//
-	DataResult<List<Appointment>> getAllDeletedAppointmentsByCustomer(String customerId);//
-	DataResult<List<Appointment>> getAllWaitingAppointments();//
-	DataResult<List<Appointment>> getAllAcceptedAppointments();//
-	DataResult<List<Appointment>> getAllDeclinedAppointments();//
-	DataResult<List<Appointment>> getAllByStaff(String staffId);//
-	DataResult<List<Appointment>> getAllByCustomer(String customerId);//
-	DataResult<List<Appointment>> getAllWaitingAppointmentsByStaff(String staffId);//
-	DataResult<List<Appointment>> getAllAcceptedAppointmentsByStaff(String staffId);//
-	DataResult<List<Appointment>> getAllDeclinedAppointmentsByStaff(String staffId);//
-	DataResult<List<Appointment>> getAllWaitingAppointmentsByCustomer(String customerId);
-	DataResult<List<Appointment>> getAllAcceptedAppointmentsByCustomer(String customerId);
-	DataResult<List<Appointment>> getAllDeclinedAppointmentsByCustomer(String customerId);
-	Result add(Appointment appointment);
-	Result update(Appointment appointment);
-	Result delete(Appointment appointment);
-	Result setStatusAccepted(Appointment appointment);
-	Result setStatusDeclined(Appointment appointment);
-	Result setStatusWaiting(Appointment appointment);
+	DataResult<GetAppointmentResponse> getByAppointmentId(String appointmentId);
+	DataResult<List<GetAllAppointmentsResponse>> getAll();
+	DataResult<List<GetAllAppointmentsResponse>> getAllDeletedAppointments();
+	DataResult<List<GetAllAppointmentsResponse>> getAllDeletedAppointmentsByStaff(String staffId);
+	DataResult<List<GetAllAppointmentsResponse>> getAllDeletedAppointmentsByCustomer(String customerId);
+	DataResult<List<GetAllAppointmentsResponse>> getAllWaitingAppointments();
+	DataResult<List<GetAllAppointmentsResponse>> getAllAcceptedAppointments();
+	DataResult<List<GetAllAppointmentsResponse>> getAllDeclinedAppointments();
+	DataResult<List<GetAllAppointmentsResponse>> getAllByStaff(String staffId);
+	DataResult<List<GetAllAppointmentsResponse>> getAllByCustomer(String customerId);
+	DataResult<List<GetAllAppointmentsResponse>> getAllWaitingAppointmentsByStaff(String staffId);
+	DataResult<List<GetAllAppointmentsResponse>> getAllAcceptedAppointmentsByStaff(String staffId);
+	DataResult<List<GetAllAppointmentsResponse>> getAllDeclinedAppointmentsByStaff(String staffId);
+	DataResult<List<GetAllAppointmentsResponse>> getAllWaitingAppointmentsByCustomer(String customerId);
+	DataResult<List<GetAllAppointmentsResponse>> getAllAcceptedAppointmentsByCustomer(String customerId);
+	DataResult<List<GetAllAppointmentsResponse>> getAllDeclinedAppointmentsByCustomer(String customerId);
+	Result add(CreateAppointmentRequest createAppointmentRequest);
+	Result update(UpdateAppointmentRequest updateAppointmentRequest);
+	Result delete(DeleteAppointmentRequest deleteAppointmentRequest);
+	Result setStatusAccepted(SetAppointmentStatusRequest setAppointmentStatusRequest);
+	Result setStatusDeclined(SetAppointmentStatusRequest setAppointmentStatusRequest);
+	Result setStatusWaiting(SetAppointmentStatusRequest setAppointmentStatusRequest);
 	
 }
