@@ -9,7 +9,6 @@ import com.emrecan.appointmentsystem.business.responses.careService.GetAllCareSe
 import com.emrecan.appointmentsystem.business.responses.careService.GetCareServiceResponse;
 import com.emrecan.appointmentsystem.core.utilities.results.DataResult;
 import com.emrecan.appointmentsystem.core.utilities.results.Result;
-import com.emrecan.appointmentsystem.entities.CareService;
 
 public interface CareServiceService {
 

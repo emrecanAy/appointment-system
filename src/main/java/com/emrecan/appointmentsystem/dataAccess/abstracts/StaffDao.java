@@ -8,8 +8,7 @@ import com.emrecan.appointmentsystem.entities.Staff;
 
 public interface StaffDao extends JpaRepository<Staff, String>{
 
-	List<Staff> getAllByIsDeletedFalse();
-	List<Staff> getAllByIsDeletedTrue();
+	List<Staff> getAllByIsDeleted(boolean isDeleted);
 	Staff getStaffByStaffId(String staffId);
 	Staff getStaffByEmail(String staffId);
 }

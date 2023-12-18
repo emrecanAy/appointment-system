@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.emrecan.appointmentsystem.business.abstracts.StaffService;
 import com.emrecan.appointmentsystem.business.constants.Messages;
+import com.emrecan.appointmentsystem.business.requests.staff.CreateStaffRequest;
+import com.emrecan.appointmentsystem.business.requests.staff.DeleteStaffRequest;
+import com.emrecan.appointmentsystem.business.requests.staff.UpdateStaffRequest;
+import com.emrecan.appointmentsystem.business.responses.staff.GetAllStaffResponse;
+import com.emrecan.appointmentsystem.business.responses.staff.GetStaffResponse;
 import com.emrecan.appointmentsystem.core.utilities.results.DataResult;
 import com.emrecan.appointmentsystem.core.utilities.results.Result;
 import com.emrecan.appointmentsystem.entities.Staff;
@@ -32,48 +37,48 @@ public class StaffsController {
 	}
 	
 	@GetMapping("/{staffId}")
-	public ResponseEntity<DataResult<Staff>> getById(@PathVariable(name = "staffId") String staffId) {
-		DataResult<Staff> staff = this._staffService.getById(staffId);
+	public ResponseEntity<DataResult<GetStaffResponse>> getById(@PathVariable(name = "staffId") String staffId) {
+		DataResult<GetStaffResponse> staff = this._staffService.getById(staffId);
 		if(staff.isSuccess()) {
-			return new ResponseEntity<DataResult<Staff>>(staff, HttpStatus.OK);
+			return new ResponseEntity<DataResult<GetStaffResponse>>(staff, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<Staff>>(staff, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<GetStaffResponse>>(staff, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/email/{email}")
-	public ResponseEntity<DataResult<Staff>> getByEmail(@PathVariable(name = "email") String email) {
-		DataResult<Staff> staff = this._staffService.getByEmail(email);
+	public ResponseEntity<DataResult<GetStaffResponse>> getByEmail(@PathVariable(name = "email") String email) {
+		DataResult<GetStaffResponse> staff = this._staffService.getByEmail(email);
 		if(staff.isSuccess()) {
-			return new ResponseEntity<DataResult<Staff>>(staff, HttpStatus.OK);
+			return new ResponseEntity<DataResult<GetStaffResponse>>(staff, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<Staff>>(staff, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<GetStaffResponse>>(staff, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getall")
-	public ResponseEntity<DataResult<List<Staff>>> getAll(){
-		DataResult<List<Staff>> staffs = this._staffService.getAll(); 
+	public ResponseEntity<DataResult<List<GetAllStaffResponse>>> getAll(){
+		DataResult<List<GetAllStaffResponse>> staffs = this._staffService.getAll(); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Staff>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllStaffResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Staff>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllStaffResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getalldeletedstuff")
-	public ResponseEntity<DataResult<List<Staff>>> getAllDeletedStaff(){
-		DataResult<List<Staff>> staffs = this._staffService.getAllDeletedStaffs(); 
+	public ResponseEntity<DataResult<List<GetAllStaffResponse>>> getAllDeletedStaff(){
+		DataResult<List<GetAllStaffResponse>> staffs = this._staffService.getAllDeletedStaffs(); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Staff>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllStaffResponse>>>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Staff>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllStaffResponse>>>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<Result> add(@RequestBody Staff staff) {
-		Result result = this._staffService.add(staff); 
+	public ResponseEntity<Result> add(@RequestBody CreateStaffRequest createStaffRequest) {
+		Result result = this._staffService.add(createStaffRequest); 
 		if(result.isSuccess()) {
 			return new ResponseEntity<Result>(result, HttpStatus.OK);
 		}else {
@@ -82,8 +87,8 @@ public class StaffsController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<Result> update(@RequestBody Staff staff) {
-		Result result = this._staffService.update(staff); 
+	public ResponseEntity<Result> update(@RequestBody UpdateStaffRequest updateStaffRequest) {
+		Result result = this._staffService.update(updateStaffRequest); 
 		if(result.isSuccess()) {
 			return new ResponseEntity<Result>(result, HttpStatus.OK);
 		}else {
@@ -92,8 +97,8 @@ public class StaffsController {
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<Result> delete(@RequestBody Staff staff) {
-		Result result = this._staffService.delete(staff); 
+	public ResponseEntity<Result> delete(@RequestBody DeleteStaffRequest deleteStaffRequest) {
+		Result result = this._staffService.delete(deleteStaffRequest); 
 		if(result.isSuccess()) {
 			result.setMessage(Messages.EntityDeleted);
 			return new ResponseEntity<Result>(result, HttpStatus.OK);

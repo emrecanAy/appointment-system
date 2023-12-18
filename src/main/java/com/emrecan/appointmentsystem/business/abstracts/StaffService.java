@@ -2,18 +2,22 @@ package com.emrecan.appointmentsystem.business.abstracts;
 
 import java.util.List;
 
+import com.emrecan.appointmentsystem.business.requests.staff.CreateStaffRequest;
+import com.emrecan.appointmentsystem.business.requests.staff.DeleteStaffRequest;
+import com.emrecan.appointmentsystem.business.requests.staff.UpdateStaffRequest;
+import com.emrecan.appointmentsystem.business.responses.staff.GetAllStaffResponse;
+import com.emrecan.appointmentsystem.business.responses.staff.GetStaffResponse;
 import com.emrecan.appointmentsystem.core.utilities.results.DataResult;
 import com.emrecan.appointmentsystem.core.utilities.results.Result;
-import com.emrecan.appointmentsystem.entities.Staff;
 
 public interface StaffService {
 
-	DataResult<Staff> getById(String staffId);
-	DataResult<Staff> getByEmail(String email);
-	DataResult<List<Staff>> getAll();
-	DataResult<List<Staff>> getAllDeletedStaffs();
-	Result add(Staff staff);
-	Result update(Staff staff);
-	Result delete(Staff staff);
+	DataResult<GetStaffResponse> getById(String staffId);
+	DataResult<GetStaffResponse> getByEmail(String email);
+	DataResult<List<GetAllStaffResponse>> getAll();
+	DataResult<List<GetAllStaffResponse>> getAllDeletedStaffs();
+	Result add(CreateStaffRequest createStaffRequest);
+	Result update(UpdateStaffRequest updateStaffRequest);
+	Result delete(DeleteStaffRequest deleteStaffRequest);
 	
 }
