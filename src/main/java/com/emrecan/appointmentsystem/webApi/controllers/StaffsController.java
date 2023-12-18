@@ -23,7 +23,6 @@ import com.emrecan.appointmentsystem.business.responses.staff.GetAllStaffRespons
 import com.emrecan.appointmentsystem.business.responses.staff.GetStaffResponse;
 import com.emrecan.appointmentsystem.core.utilities.results.DataResult;
 import com.emrecan.appointmentsystem.core.utilities.results.Result;
-import com.emrecan.appointmentsystem.entities.Staff;
 
 @RestController
 @RequestMapping("/api/staff")

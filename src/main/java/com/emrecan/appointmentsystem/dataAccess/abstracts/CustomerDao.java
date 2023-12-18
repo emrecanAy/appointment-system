@@ -10,7 +10,6 @@ public interface CustomerDao extends JpaRepository<Customer, String>{
 
 	public Customer getCustomerByCustomerId(String customerId);
 	public Customer getCustomerByEmail(String email);
-	public List<Customer> getAllCustomersByIsDeletedFalse();
-	public List<Customer> getAllCustomersByIsDeletedTrue();
+	public List<Customer> getAllCustomersByIsDeleted(boolean isDeleted);
 	
 }

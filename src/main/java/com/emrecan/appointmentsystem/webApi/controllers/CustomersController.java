@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.emrecan.appointmentsystem.business.abstracts.CustomerService;
 import com.emrecan.appointmentsystem.business.constants.Messages;
+import com.emrecan.appointmentsystem.business.requests.customer.CreateCustomerRequest;
+import com.emrecan.appointmentsystem.business.requests.customer.DeleteCustomerRequest;
+import com.emrecan.appointmentsystem.business.requests.customer.UpdateCustomerRequest;
+import com.emrecan.appointmentsystem.business.responses.customer.GetAllCustomersResponse;
+import com.emrecan.appointmentsystem.business.responses.customer.GetCustomerResponse;
 import com.emrecan.appointmentsystem.core.utilities.results.DataResult;
 import com.emrecan.appointmentsystem.core.utilities.results.Result;
-import com.emrecan.appointmentsystem.entities.Customer;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -32,48 +36,48 @@ public class CustomersController {
 	}
 	
 	@GetMapping("/{customerId}")
-	public ResponseEntity<DataResult<Customer>> getById(@PathVariable(name = "customerId") String customerId) {
-		DataResult<Customer> customer = this._customerService.getById(customerId);
+	public ResponseEntity<DataResult<GetCustomerResponse>> getById(@PathVariable(name = "customerId") String customerId) {
+		DataResult<GetCustomerResponse> customer = this._customerService.getById(customerId);
 		if(customer.isSuccess()) {
-			return new ResponseEntity<DataResult<Customer>>(customer, HttpStatus.OK);
+			return new ResponseEntity<DataResult<GetCustomerResponse>>(customer, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<Customer>>(customer, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<GetCustomerResponse>>(customer, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/email/{email}")
-	public ResponseEntity<DataResult<Customer>> getByEmail(@PathVariable(name = "email") String email) {
-		DataResult<Customer> customer = this._customerService.getByEmail(email);
+	public ResponseEntity<DataResult<GetCustomerResponse>> getByEmail(@PathVariable(name = "email") String email) {
+		DataResult<GetCustomerResponse> customer = this._customerService.getByEmail(email);
 		if(customer.isSuccess()) {
-			return new ResponseEntity<DataResult<Customer>>(customer, HttpStatus.OK);
+			return new ResponseEntity<DataResult<GetCustomerResponse>>(customer, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<Customer>>(customer, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<GetCustomerResponse>>(customer, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getall")
-	public ResponseEntity<DataResult<List<Customer>>> getAll(){
-		DataResult<List<Customer>> customers = this._customerService.getAll(); 
+	public ResponseEntity<DataResult<List<GetAllCustomersResponse>>> getAll(){
+		DataResult<List<GetAllCustomersResponse>> customers = this._customerService.getAll(); 
 		if(customers.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Customer>>>(customers, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllCustomersResponse>>>(customers, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Customer>>>(customers, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllCustomersResponse>>>(customers, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@GetMapping("/getalldeletedcustomers")
-	public ResponseEntity<DataResult<List<Customer>>> getAllDeletedCustomers(){
-		DataResult<List<Customer>> customers = this._customerService.getAllDeletedCustomers(); 
+	public ResponseEntity<DataResult<List<GetAllCustomersResponse>>> getAllDeletedCustomers(){
+		DataResult<List<GetAllCustomersResponse>> customers = this._customerService.getAllDeletedCustomers(); 
 		if(customers.isSuccess()) {
-			return new ResponseEntity<DataResult<List<Customer>>>(customers, HttpStatus.OK);
+			return new ResponseEntity<DataResult<List<GetAllCustomersResponse>>>(customers, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<Customer>>>(customers, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DataResult<List<GetAllCustomersResponse>>>(customers, HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@PostMapping("/add")
-	public ResponseEntity<Result> add(@RequestBody Customer customer) {
-		Result result = this._customerService.add(customer); 
+	public ResponseEntity<Result> add(@RequestBody CreateCustomerRequest createCustomerRequest) {
+		Result result = this._customerService.add(createCustomerRequest); 
 		if(result.isSuccess()) {
 			return new ResponseEntity<Result>(result, HttpStatus.OK);
 		}else {
@@ -82,8 +86,8 @@ public class CustomersController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<Result> update(@RequestBody Customer customer) {
-		Result result = this._customerService.update(customer);
+	public ResponseEntity<Result> update(@RequestBody UpdateCustomerRequest updateCustomerRequest) {
+		Result result = this._customerService.update(updateCustomerRequest);
 		if(result.isSuccess()) {
 			return new ResponseEntity<Result>(result, HttpStatus.OK);
 		}else {
@@ -92,9 +96,8 @@ public class CustomersController {
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<Result> delete(@RequestBody Customer customer) {
-		customer.setDeleted(true);
-		Result result = this._customerService.update(customer);
+	public ResponseEntity<Result> delete(@RequestBody DeleteCustomerRequest deleteCustomerRequest) {
+		Result result = this._customerService.delete(deleteCustomerRequest);
 		if(result.isSuccess()) {
 			result.setMessage(Messages.EntityDeleted);
 			return new ResponseEntity<Result>(result, HttpStatus.OK);
