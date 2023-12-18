@@ -2,7 +2,6 @@ package com.emrecan.appointmentsystem.entities;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.annotation.CreatedDate;
 
 import com.emrecan.appointmentsystem.core.entities.IEntity;
-import com.emrecan.appointmentsystem.entities.enums.Role;
 import com.emrecan.appointmentsystem.entities.enums.Status;
 
 import lombok.AllArgsConstructor;

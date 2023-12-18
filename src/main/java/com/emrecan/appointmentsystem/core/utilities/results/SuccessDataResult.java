@@ -1,9 +1,5 @@
 package com.emrecan.appointmentsystem.core.utilities.results;
 
-import java.util.Optional;
-
-import com.emrecan.appointmentsystem.entities.Admin;
-
 public class SuccessDataResult<T> extends DataResult<T> implements IDataResult<T> {
 	
 	public SuccessDataResult(T data, String message) {

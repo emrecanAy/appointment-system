@@ -2,7 +2,6 @@ package com.emrecan.appointmentsystem.entities;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.CreatedDate;
 
 import com.emrecan.appointmentsystem.core.entities.IEntity;
-import com.emrecan.appointmentsystem.entities.enums.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +30,7 @@ public class Customer implements IEntity {
 	@GeneratedValue(generator = "uuid-hibernate-generator")
 	@GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "CustomerId")
-	private String CustomerId;
+	private String customerId;
 	
 	@Column(name = "FirstName")
 	private String firstName;
@@ -54,7 +51,7 @@ public class Customer implements IEntity {
 	private String password;
 	
 	@Column(name = "createdAt")
-	private static final Date createdAt = Date.valueOf(LocalDate.now());
+	private final Date createdAt = Date.valueOf(LocalDate.now());
 	
 	@Column(name = "isDeleted")
 	private boolean isDeleted = false;

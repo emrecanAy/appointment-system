@@ -1,18 +1,18 @@
 package com.emrecan.appointmentsystem.webApi.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emrecan.appointmentsystem.business.abstracts.AdminService;
-import com.emrecan.appointmentsystem.core.utilities.results.IDataResult;
-import com.emrecan.appointmentsystem.core.utilities.results.IResult;
+import com.emrecan.appointmentsystem.core.utilities.results.DataResult;
+import com.emrecan.appointmentsystem.core.utilities.results.Result;
 import com.emrecan.appointmentsystem.entities.Admin;
 
 @RestController
@@ -26,18 +26,19 @@ public class AdminsController {
 		this._adminService = _adminService;
 	}
 	
-	public Optional<Admin> getById(String id) {
-		return null;
+	@GetMapping("/{adminId}")
+	public DataResult<Admin> getById(@PathVariable String adminId) {
+		return this._adminService.getById(adminId);
 	}
 	
 	@GetMapping("/getall")
-	public IDataResult<List<Admin>> getAll(){
+	public DataResult<List<Admin>> getAll(){
 		
 		return this._adminService.getAll();
 	}
 
 	@PostMapping("/add")
-	public IResult Add(@RequestBody Admin admin) {
+	public Result Add(@RequestBody Admin admin) {
 		return this._adminService.add(admin);
 	}
 	

@@ -1,15 +1,14 @@
 package com.emrecan.appointmentsystem.business.concretes;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.emrecan.appointmentsystem.business.abstracts.AdminService;
 import com.emrecan.appointmentsystem.business.constants.Messages;
-import com.emrecan.appointmentsystem.core.utilities.results.IDataResult;
-import com.emrecan.appointmentsystem.core.utilities.results.IResult;
+import com.emrecan.appointmentsystem.core.utilities.results.DataResult;
+import com.emrecan.appointmentsystem.core.utilities.results.Result;
 import com.emrecan.appointmentsystem.core.utilities.results.SuccessDataResult;
 import com.emrecan.appointmentsystem.core.utilities.results.SuccessResult;
 import com.emrecan.appointmentsystem.dataAccess.abstracts.AdminDao;
@@ -22,22 +21,22 @@ public class AdminManager implements AdminService{
 	
 	@Autowired
 	public AdminManager(AdminDao _adminDao) {
-		super();
 		this._adminDao = _adminDao;
 	}
 
 	@Override
-	public IDataResult<Admin> getById(String id) {
-		return null;
+	public DataResult<Admin> getById(String adminId) {
+		this._adminDao.getAdminByAdminId(adminId);
+		return new SuccessDataResult<Admin>(Messages.EntityListed);
 	}
 
 	@Override
-	public IDataResult<List<Admin>> getAll() {
-		return new SuccessDataResult<List<Admin>>(this._adminDao.findAll(), Messages.EntitiesListed);
+	public DataResult<List<Admin>> getAll() {
+		return new SuccessDataResult<List<Admin>>(this._adminDao.getAllAdminsByIsDeletedFalse(), Messages.EntitiesListed);
 	}
 
 	@Override
-	public IResult add(Admin admin) {
+	public Result add(Admin admin) {
 		this._adminDao.save(admin);
 		return new SuccessResult(Messages.EntityAdded);
 	}
