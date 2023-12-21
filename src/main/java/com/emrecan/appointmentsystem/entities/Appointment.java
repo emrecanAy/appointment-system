@@ -2,12 +2,9 @@ package com.emrecan.appointmentsystem.entities;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -30,7 +27,7 @@ public class Appointment implements IEntity {
 	@Id
 	@GeneratedValue(generator = "uuid-hibernate-generator")
 	@GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name = "AppointmentId")
+	@Column(name = "appointment_id")
 	private String appointmentId;
 	
 	@Column(name = "CustomerId")
@@ -47,13 +44,17 @@ public class Appointment implements IEntity {
 	
 	@Column(name = "Note")
 	private String note;
+
+	@ManyToMany
+	@JoinTable(name = "appointments_careservices",
+			joinColumns = @JoinColumn(name = "appointment_id"),
+			inverseJoinColumns = @JoinColumn(name = "care_service_id"))
+	private List<CareService> careServices;
 	
 	@Column(name = "CreatedAt")
 	private final Date createdAt = Date.valueOf(LocalDate.now());
 	
 	@Column(name = "IsDeleted")
 	private boolean isDeleted = false;
-	
-	
-	
+
 }

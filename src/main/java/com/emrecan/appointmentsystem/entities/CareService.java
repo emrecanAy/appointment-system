@@ -47,6 +47,4 @@ public class CareService implements IEntity {
 	@Column(name = "IsDeleted")
 	private boolean isDeleted = false;
 	
-
-	
 }

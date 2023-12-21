@@ -23,7 +23,6 @@ import com.emrecan.appointmentsystem.business.responses.appointment.GetAllAppoin
 import com.emrecan.appointmentsystem.business.responses.appointment.GetAppointmentResponse;
 import com.emrecan.appointmentsystem.core.utilities.results.DataResult;
 import com.emrecan.appointmentsystem.core.utilities.results.Result;
-import com.emrecan.appointmentsystem.entities.Appointment;
 
 @RestController
 @RequestMapping("/api/appointments")

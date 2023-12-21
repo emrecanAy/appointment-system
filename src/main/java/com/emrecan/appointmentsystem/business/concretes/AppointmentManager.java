@@ -150,6 +150,8 @@ public class AppointmentManager implements AppointmentService{
 	@Override
 	public Result add(CreateAppointmentRequest createAppointmentRequest) {
 		Appointment appointment = this._modelMapperService.forRequest().map(createAppointmentRequest, Appointment.class);
+		//appointment.setCareServices(createAppointmentRequest.getCareServices());
+		System.out.println(appointment);
 		this._appointmentDao.save(appointment);
 		return new SuccessResult(Messages.EntityAdded);
 	}

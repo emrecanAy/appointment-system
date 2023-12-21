@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -13,7 +12,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-@ComponentScan("com.emrecan.appointmentsystem")
 public class AppointmentSystemApplication {
 
 	public static void main(String[] args) {
@@ -33,4 +31,6 @@ public class AppointmentSystemApplication {
 		return new ModelMapper();
 	}
 
+	//ARADA BAKALIM
+	
 }
