@@ -1,6 +1,6 @@
 package com.emrecan.appointmentsystem.business.responses.appointment;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import com.emrecan.appointmentsystem.entities.enums.Status;
 
@@ -15,7 +15,7 @@ public class GetAppointmentResponse {
 	private String appointmentId;
 	private String customerId;
 	private String staffId;
-	private Date appointmentDate;
+	private LocalDateTime appointmentDate;
 	private Status status;
 	private String note;
 }

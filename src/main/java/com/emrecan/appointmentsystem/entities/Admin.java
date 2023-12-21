@@ -1,7 +1,6 @@
 package com.emrecan.appointmentsystem.entities;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.emrecan.appointmentsystem.core.entities.IEntity;
@@ -56,7 +55,7 @@ public class Admin implements IEntity {
 	private String password;
 	
 	@Column(name = "CreatedAt")
-	private final Date createdAt = Date.valueOf(LocalDate.now());
+	private final LocalDateTime createdAt = LocalDateTime.now();
 	
 	@Column(name = "IsDeleted")
 	private boolean isDeleted = false;

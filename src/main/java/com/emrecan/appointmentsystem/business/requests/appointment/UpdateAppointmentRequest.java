@@ -1,6 +1,6 @@
 package com.emrecan.appointmentsystem.business.requests.appointment;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.emrecan.appointmentsystem.entities.CareService;
@@ -18,7 +18,7 @@ public class UpdateAppointmentRequest {
 	private String appointmentId;
 	private String customerId;
 	private String staffId;
-	private Date appointmentDate;
+	private LocalDateTime appointmentDate;
 	private Status status;
 	private List<CareService> careServices;
 	private String note;

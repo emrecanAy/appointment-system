@@ -1,7 +1,6 @@
 package com.emrecan.appointmentsystem.entities;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.*;
@@ -37,7 +36,7 @@ public class Appointment implements IEntity {
 	private String staffId;
 	
 	@Column(name = "AppointmentDate")
-	private Date appointmentDate;
+	private LocalDateTime appointmentDate;
 	
 	@Column(name = "Status")
 	private Status status = Status.WAITING;
@@ -52,7 +51,7 @@ public class Appointment implements IEntity {
 	private List<CareService> careServices;
 	
 	@Column(name = "CreatedAt")
-	private final Date createdAt = Date.valueOf(LocalDate.now());
+	private final LocalDateTime createdAt = LocalDateTime.now();
 	
 	@Column(name = "IsDeleted")
 	private boolean isDeleted = false;

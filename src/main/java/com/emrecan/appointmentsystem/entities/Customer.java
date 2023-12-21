@@ -1,7 +1,6 @@
 package com.emrecan.appointmentsystem.entities;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,7 +50,7 @@ public class Customer implements IEntity {
 	private String password;
 	
 	@Column(name = "createdAt")
-	private final Date createdAt = Date.valueOf(LocalDate.now());
+	private final LocalDateTime createdAt = LocalDateTime.now();
 	
 	@Column(name = "isDeleted")
 	private boolean isDeleted = false;
