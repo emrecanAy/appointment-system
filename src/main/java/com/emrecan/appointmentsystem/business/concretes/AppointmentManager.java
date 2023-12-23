@@ -39,119 +39,117 @@ public class AppointmentManager implements AppointmentService{
 	public DataResult<GetAppointmentResponse> getByAppointmentId(String appointmentId) {
 		Appointment appointment = this._appointmentDao.getAppointmentByAppointmentId(appointmentId);
 		GetAppointmentResponse appointmentResponse = this._modelMapperService.forResponse().map(appointment, GetAppointmentResponse.class);
-		return new SuccessDataResult<GetAppointmentResponse>(appointmentResponse, Messages.EntityListed);
+		return new SuccessDataResult<>(appointmentResponse, Messages.EntityListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAll() {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByIsDeleted(false);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllDeletedAppointments() {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByIsDeleted(true);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllDeletedAppointmentsByStaff(String staffId) {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByStaffIdAndIsDeletedTrue(staffId);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllDeletedAppointmentsByCustomer(String customerId) {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByCustomerIdAndIsDeletedTrue(customerId);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllWaitingAppointments() {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByStatusIs(Status.WAITING);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllAcceptedAppointments() {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByStatusIs(Status.ACCEPTED);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllDeclinedAppointments() {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByStatusIs(Status.DECLINED);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllByStaff(String staffId) {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByStaffIdAndIsDeletedFalse(staffId);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllByCustomer(String customerId) {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByCustomerIdAndIsDeletedFalse(customerId);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllWaitingAppointmentsByStaff(String staffId) {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByStaffIdAndIsDeletedFalseAndStatusIs(staffId, Status.WAITING);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllAcceptedAppointmentsByStaff(String staffId) {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByStaffIdAndIsDeletedFalseAndStatusIs(staffId, Status.ACCEPTED);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllDeclinedAppointmentsByStaff(String staffId) {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByStaffIdAndIsDeletedFalseAndStatusIs(staffId, Status.DECLINED);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllWaitingAppointmentsByCustomer(String customerId) {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByCustomerIdAndIsDeletedFalseAndStatusIs(customerId, Status.WAITING);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllAcceptedAppointmentsByCustomer(String customerId) {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByCustomerIdAndIsDeletedFalseAndStatusIs(customerId, Status.ACCEPTED);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllDeclinedAppointmentsByCustomer(String customerId) {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByCustomerIdAndIsDeletedFalseAndStatusIs(customerId, Status.DECLINED);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllAppointmentsResponse>>(appointmentsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public Result add(CreateAppointmentRequest createAppointmentRequest) {
 		Appointment appointment = this._modelMapperService.forRequest().map(createAppointmentRequest, Appointment.class);
-		//appointment.setCareServices(createAppointmentRequest.getCareServices());
-		System.out.println(appointment);
 		this._appointmentDao.save(appointment);
 		return new SuccessResult(Messages.EntityAdded);
 	}

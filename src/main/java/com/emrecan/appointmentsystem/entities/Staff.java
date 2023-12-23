@@ -1,13 +1,11 @@
 package com.emrecan.appointmentsystem.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import com.emrecan.appointmentsystem.core.entities.IEntity;
 import com.emrecan.appointmentsystem.entities.enums.Role;
@@ -51,7 +49,11 @@ public class Staff implements IEntity {
 	
 	@Column(name = "Password")
 	private String password;
-	
+
+	@OneToMany(mappedBy = "staff")
+	@JsonIgnore
+	private List<Appointment> appointments;
+
 	@Column(name = "createdAt")
 	private final LocalDateTime createdAt = LocalDateTime.now();
 	

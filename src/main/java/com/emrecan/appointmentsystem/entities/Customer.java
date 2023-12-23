@@ -1,13 +1,11 @@
 package com.emrecan.appointmentsystem.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.emrecan.appointmentsystem.core.entities.IEntity;
@@ -28,31 +26,35 @@ public class Customer implements IEntity {
 	@Id
 	@GeneratedValue(generator = "uuid-hibernate-generator")
 	@GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name = "CustomerId")
+	@Column(name = "customer_id")
 	private String customerId;
 	
-	@Column(name = "FirstName")
+	@Column(name = "first_name")
 	private String firstName;
 	
-	@Column(name = "LastName")
+	@Column(name = "last_name")
 	private String lastName;
 	
-	@Column(name = "Email")
+	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "PhoneNumber")
+	@Column(name = "phone_number")
 	private String phoneNumber;
 	
-	@Column(name = "UserName")
+	@Column(name = "user_name")
 	private String userName;
 	
-	@Column(name = "Password")
+	@Column(name = "password")
 	private String password;
+
+	@OneToMany(mappedBy = "customer")
+	@JsonIgnore
+	private List<Appointment> appointments;
 	
-	@Column(name = "createdAt")
+	@Column(name = "created_at")
 	private final LocalDateTime createdAt = LocalDateTime.now();
 	
-	@Column(name = "isDeleted")
+	@Column(name = "is_deleted")
 	private boolean isDeleted = false;
 
 }

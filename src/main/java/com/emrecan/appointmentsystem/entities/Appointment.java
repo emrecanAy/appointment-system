@@ -29,20 +29,28 @@ public class Appointment implements IEntity {
 	@Column(name = "appointment_id")
 	private String appointmentId;
 	
-	@Column(name = "CustomerId")
+	@Column(name = "customer_id")
 	private String customerId;
 	
-	@Column(name = "StaffId")
+	@Column(name = "staff_id")
 	private String staffId;
 	
-	@Column(name = "AppointmentDate")
+	@Column(name = "appointment_date")
 	private LocalDateTime appointmentDate;
 	
-	@Column(name = "Status")
+	@Column(name = "status")
 	private Status status = Status.WAITING;
 	
-	@Column(name = "Note")
+	@Column(name = "note")
 	private String note;
+
+	@ManyToOne
+	@JoinColumn(name = "customer_id", nullable = false, insertable = false, updatable = false)
+	private Customer customer;
+
+	@ManyToOne
+	@JoinColumn(name = "staff_id", nullable = false, insertable = false, updatable = false)
+	private Staff staff;
 
 	@ManyToMany
 	@JoinTable(name = "appointments_careservices",
@@ -50,10 +58,10 @@ public class Appointment implements IEntity {
 			inverseJoinColumns = @JoinColumn(name = "care_service_id"))
 	private List<CareService> careServices;
 	
-	@Column(name = "CreatedAt")
+	@Column(name = "created_at")
 	private final LocalDateTime createdAt = LocalDateTime.now();
 	
-	@Column(name = "IsDeleted")
+	@Column(name = "is_deleted")
 	private boolean isDeleted = false;
 
 }
