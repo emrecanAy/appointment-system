@@ -30,34 +30,34 @@ public class Admin implements IEntity {
 	@Id
 	@GeneratedValue(generator = "uuid-hibernate-generator")
 	@GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name = "AdminId")
+	@Column(name = "admin_id")
 	private UUID adminId;
 	
 	@Column(name = "role")
 	private Role role;
 	
-	@Column(name = "FirstName")
+	@Column(name = "first_name")
 	private String firstName;
 	
-	@Column(name = "LastName")
+	@Column(name = "last_name")
 	private String lastName;
 	
-	@Column(name = "Email")
+	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "PhoneNumber")
+	@Column(name = "phone_number")
 	private String phoneNumber;
 	
-	@Column(name = "UserName")
+	@Column(name = "user_name")
 	private String userName;
 	
-	@Column(name = "Password")
+	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "CreatedAt")
+	@Column(name = "created_at")
 	private final LocalDateTime createdAt = LocalDateTime.now();
 	
-	@Column(name = "IsDeleted")
+	@Column(name = "is_deleted")
 	private boolean isDeleted = false;
 }
 

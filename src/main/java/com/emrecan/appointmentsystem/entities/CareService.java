@@ -28,22 +28,22 @@ public class CareService implements IEntity {
 	@Id
 	@GeneratedValue(generator = "uuid-hibernate-generator")
 	@GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name = "CareServiceId")
+	@Column(name = "care_service_id")
 	private String careServiceId;
 	
-	@Column(name = "ServiceName")
+	@Column(name = "care_service_name")
 	private String careServiceName;
 	
-	@Column(name = "ServiceDescription")
+	@Column(name = "care_service_description")
 	private String careServiceDescription;
 	
-	@Column(name = "ServicePrice")
+	@Column(name = "care_service_price")
 	private double careServicePrice;
 	
-	@Column(name = "CreatedAt")
+	@Column(name = "created_at")
 	private final LocalDateTime createdAt = LocalDateTime.now();
 	
-	@Column(name = "IsDeleted")
+	@Column(name = "is_deleted")
 	private boolean isDeleted = false;
 	
 }

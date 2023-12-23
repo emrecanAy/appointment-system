@@ -194,6 +194,13 @@ public class AppointmentManager implements AppointmentService{
 		return new SuccessResult(Messages.EntityUpdated);
 	}
 
-	
-	
+	@Override
+	public Result setStatusCancelled(SetAppointmentStatusRequest setAppointmentStatusRequest) {
+		Appointment appointment = this._modelMapperService.forRequest().map(setAppointmentStatusRequest, Appointment.class);
+		appointment.setStatus(Status.CANCELLED);
+		this._appointmentDao.save(appointment);
+		return new SuccessResult(Messages.EntityUpdated);
+	}
+
+
 }

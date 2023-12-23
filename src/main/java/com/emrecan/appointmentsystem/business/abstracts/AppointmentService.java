@@ -35,5 +35,6 @@ public interface AppointmentService {
 	Result setStatusAccepted(SetAppointmentStatusRequest setAppointmentStatusRequest);
 	Result setStatusDeclined(SetAppointmentStatusRequest setAppointmentStatusRequest);
 	Result setStatusWaiting(SetAppointmentStatusRequest setAppointmentStatusRequest);
-	
+	Result setStatusCancelled(SetAppointmentStatusRequest setAppointmentStatusRequest);
+
 }

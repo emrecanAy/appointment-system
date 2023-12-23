@@ -224,6 +224,16 @@ public class AppointmentsController {
 			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
+
+	@PutMapping("/setstatuscancelled")
+	public ResponseEntity<Result> setStatusCancelled(@RequestBody SetAppointmentStatusRequest setAppointmentStatusRequest) {
+		Result result = this._appointmentService.setStatusCancelled(setAppointmentStatusRequest);
+		if(result.isSuccess()) {
+			return new ResponseEntity<>(result, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	
 	

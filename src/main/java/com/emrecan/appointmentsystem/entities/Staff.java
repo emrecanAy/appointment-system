@@ -26,38 +26,38 @@ public class Staff implements IEntity {
 	@Id
 	@GeneratedValue(generator = "uuid-hibernate-generator")
 	@GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name = "StaffId")
+	@Column(name = "staff_id")
 	private String staffId;
 	
 	@Column(name = "role")
 	private Role role = Role.STAFF;
 	
-	@Column(name = "FirstName")
+	@Column(name = "first_name")
 	private String firstName;
 	
-	@Column(name = "LastName")
+	@Column(name = "last_name")
 	private String lastName;
 	
-	@Column(name = "Email")
+	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "PhoneNumber")
+	@Column(name = "phone_number")
 	private String phoneNumber;
 	
-	@Column(name = "UserName")
+	@Column(name = "user_name")
 	private String userName;
 	
-	@Column(name = "Password")
+	@Column(name = "password")
 	private String password;
 
 	@OneToMany(mappedBy = "staff")
 	@JsonIgnore
 	private List<Appointment> appointments;
 
-	@Column(name = "createdAt")
+	@Column(name = "created_at")
 	private final LocalDateTime createdAt = LocalDateTime.now();
 	
-	@Column(name = "isDeleted")
+	@Column(name = "is_deleted")
 	private boolean isDeleted = false;
 	
 }
