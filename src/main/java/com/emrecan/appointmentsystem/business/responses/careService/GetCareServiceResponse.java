@@ -12,6 +12,5 @@ public class GetCareServiceResponse {
 	private String careServiceId;
 	private String careServiceName;
 	private String careServiceDescription;
-	private double careServicePrice;
 
 }

@@ -54,6 +54,10 @@ public class Staff implements IEntity {
 	@JsonIgnore
 	private List<Appointment> appointments;
 
+	@OneToMany(mappedBy = "staff")
+	@JsonIgnore
+	private List<StaffCareService> staffCareServices;
+
 	@Column(name = "created_at")
 	private final LocalDateTime createdAt = LocalDateTime.now();
 	

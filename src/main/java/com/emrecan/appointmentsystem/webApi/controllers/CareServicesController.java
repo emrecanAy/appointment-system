@@ -38,9 +38,9 @@ public class CareServicesController {
 	public ResponseEntity<DataResult<GetCareServiceResponse>> getById(@PathVariable(name = "careServiceId") String careServiceId) {
 		DataResult<GetCareServiceResponse> careService = this._careServiceService.getById(careServiceId);
 		if(careService.isSuccess()) {
-			return new ResponseEntity<DataResult<GetCareServiceResponse>>(careService, HttpStatus.OK);
+			return new ResponseEntity<>(careService, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<GetCareServiceResponse>>(careService, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(careService, HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -48,9 +48,9 @@ public class CareServicesController {
 	public ResponseEntity<DataResult<List<GetAllCareServicesResponse>>> getAll(){
 		DataResult<List<GetAllCareServicesResponse>> careServices = this._careServiceService.getAll(); 
 		if(careServices.isSuccess()) {
-			return new ResponseEntity<DataResult<List<GetAllCareServicesResponse>>>(careServices, HttpStatus.OK);
+			return new ResponseEntity<>(careServices, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<GetAllCareServicesResponse>>>(careServices, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(careServices, HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -58,9 +58,9 @@ public class CareServicesController {
 	public ResponseEntity<DataResult<List<GetAllCareServicesResponse>>> getAllDeleted(){
 		DataResult<List<GetAllCareServicesResponse>> careServices = this._careServiceService.getAllDeleted(); 
 		if(careServices.isSuccess()) {
-			return new ResponseEntity<DataResult<List<GetAllCareServicesResponse>>>(careServices, HttpStatus.OK);
+			return new ResponseEntity<>(careServices, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<GetAllCareServicesResponse>>>(careServices, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(careServices, HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -68,9 +68,9 @@ public class CareServicesController {
 	public ResponseEntity<Result> add(@RequestBody CreateCareServiceRequest createCareServiceRequest) {
 		Result result = this._careServiceService.add(createCareServiceRequest); 
 		if(result.isSuccess()) {
-			return new ResponseEntity<Result>(result, HttpStatus.CREATED);
+			return new ResponseEntity<>(result, HttpStatus.CREATED);
 		}else {
-			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -78,9 +78,9 @@ public class CareServicesController {
 	public ResponseEntity<Result> update(@RequestBody UpdateCareServiceRequest updateCareServiceRequest) {
 		Result result = this._careServiceService.update(updateCareServiceRequest); 
 		if(result.isSuccess()) {
-			return new ResponseEntity<Result>(result, HttpStatus.OK);
+			return new ResponseEntity<>(result, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -88,9 +88,9 @@ public class CareServicesController {
 	public ResponseEntity<Result> delete(@RequestBody DeleteCareServiceRequest deleteCareServiceRequest) {
 		Result result = this._careServiceService.delete(deleteCareServiceRequest); 
 		if(result.isSuccess()) {
-			return new ResponseEntity<Result>(result, HttpStatus.OK);
+			return new ResponseEntity<>(result, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
 	

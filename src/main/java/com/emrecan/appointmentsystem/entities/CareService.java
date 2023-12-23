@@ -1,13 +1,11 @@
 package com.emrecan.appointmentsystem.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.emrecan.appointmentsystem.core.entities.IEntity;
@@ -36,9 +34,10 @@ public class CareService implements IEntity {
 	
 	@Column(name = "care_service_description")
 	private String careServiceDescription;
-	
-	@Column(name = "care_service_price")
-	private double careServicePrice;
+
+	@OneToMany(mappedBy = "careService")
+	@JsonIgnore
+	private List<StaffCareService> staffCareServices;
 	
 	@Column(name = "created_at")
 	private final LocalDateTime createdAt = LocalDateTime.now();
