@@ -53,10 +53,10 @@ public class Appointment implements IEntity {
 	private Staff staff;
 
 	@ManyToMany
-	@JoinTable(name = "appointments_careservices",
+	@JoinTable(name = "appointments_staffcareservices",
 			joinColumns = @JoinColumn(name = "appointment_id"),
-			inverseJoinColumns = @JoinColumn(name = "care_service_id"))
-	private List<CareService> careServices;
+			inverseJoinColumns = @JoinColumn(name = "staff_care_service_id"))
+	private List<StaffCareService> staffCareServices;
 	
 	@Column(name = "created_at")
 	private final LocalDateTime createdAt = LocalDateTime.now();

@@ -3,6 +3,7 @@ package com.emrecan.appointmentsystem.business.requests.appointment;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.emrecan.appointmentsystem.business.requests.staffCareService.SetStaffCareServiceRequest;
 import com.emrecan.appointmentsystem.entities.enums.Status;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class CreateAppointmentRequest {
 	private String staffId;
 	private LocalDateTime appointmentDate;
 	private Status status = Status.WAITING;
-	private List<SetCareServiceRequest> careServices;
+	private List<SetStaffCareServiceRequest> staffCareServices;
 	private String note;
 	
 }
