@@ -19,6 +19,7 @@ public interface StaffCareServiceService {
     DataResult<List<GetAllStaffCareServicesResponse>> getAll();
     DataResult<List<GetAllStaffCareServicesResponse>> getAllDeleted();
     DataResult<List<GetAllStaffCareServicesResponse>> getAllStaffCareServicesByStaffIdAndIsDeleted(String staffId, boolean isDeleted);
+    DataResult<List<GetAllStaffCareServicesResponse>> getAllStaffCareServicesByCareServiceIdAndIsDeleted(String careServiceId, boolean isDeleted);
     Result add(CreateStaffCareServiceRequest createStaffCareServiceRequest);
     Result update(UpdateStaffCareServiceRequest updateStaffCareServiceRequest);
     Result delete(DeleteStaffCareServiceRequest deleteStaffCareServiceRequest);

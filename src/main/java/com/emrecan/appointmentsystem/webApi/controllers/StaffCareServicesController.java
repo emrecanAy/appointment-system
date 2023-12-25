@@ -70,6 +70,16 @@ public class StaffCareServicesController {
         }
     }
 
+    @GetMapping("/getallbycareservice/{careServiceId}")
+    public ResponseEntity<DataResult<List<GetAllStaffCareServicesResponse>>> getAllStaffCareServicesByCareService(@PathVariable(name = "careServiceId") String careServiceId){
+        DataResult<List<GetAllStaffCareServicesResponse>> careServices = this._staffCareServiceService.getAllStaffCareServicesByCareServiceIdAndIsDeleted(careServiceId, false);
+        if(careServices.isSuccess()) {
+            return new ResponseEntity<>(careServices, HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(careServices, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/getalldeletedbystaff/{staffId}")
     public ResponseEntity<DataResult<List<GetAllStaffCareServicesResponse>>> getAllDeletedStaffCareServicesByStaff(@PathVariable(name = "staffId") String staffId){
         DataResult<List<GetAllStaffCareServicesResponse>> careServices = this._staffCareServiceService.getAllStaffCareServicesByStaffIdAndIsDeleted(staffId, true);

@@ -17,6 +17,8 @@ public interface StaffCareServiceDao extends JpaRepository<StaffCareService, Str
     StaffCareService getByStaffCareServiceId(String staffCareServiceId);
     List<StaffCareService> getAllStaffCareServicesByIsDeleted(boolean isDeleted);
     List<StaffCareService> getAllStaffCareServicesByStaffIdAndIsDeleted(String staffId, boolean isDeleted);
+    List<StaffCareService> getAllStaffCareServicesByCareServiceIdAndIsDeleted(String careServiceId, boolean isDeleted);
+
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query("update StaffCareService s set s.isDeleted = true where s.staffCareServiceId=:staffCareServiceId")

@@ -30,7 +30,5 @@ public class AppointmentSystemApplication {
 	public ModelMapper getModelMapper() {
 		return new ModelMapper();
 	}
-
-	//ARADA BAKALIM
 	
 }

@@ -70,6 +70,15 @@ public class StaffCareServiceManager implements StaffCareServiceService {
     }
 
     @Override
+    public DataResult<List<GetAllStaffCareServicesResponse>> getAllStaffCareServicesByCareServiceIdAndIsDeleted(String careServiceId, boolean isDeleted) {
+        List<StaffCareService> staffCareServices = this._staffCareServiceDao.getAllStaffCareServicesByCareServiceIdAndIsDeleted(careServiceId, isDeleted);
+        List<GetAllStaffCareServicesResponse> staffCareServicesResponse = staffCareServices.stream()
+                .map(staffCareService->this._modelMapperService.forResponse().map(staffCareService, GetAllStaffCareServicesResponse.class)).collect(Collectors.toList());
+
+        return new SuccessDataResult<>(staffCareServicesResponse, Messages.EntitiesListed);
+    }
+
+    @Override
     public Result add(CreateStaffCareServiceRequest createStaffCareServiceRequest) {
         StaffCareService staffCareService = this._modelMapperService.forRequest().map(createStaffCareServiceRequest, StaffCareService.class);
         this._staffCareServiceDao.save(staffCareService);
