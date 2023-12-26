@@ -44,6 +44,16 @@ public class AppointmentsController {
 			return new ResponseEntity<>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
+
+	@GetMapping("/getalldeleted")
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllDeleted(){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAllDeletedAppointments();
+		if(staffs.isSuccess()) {
+			return new ResponseEntity<>(staffs, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(staffs, HttpStatus.NOT_FOUND);
+		}
+	}
 	
 	@GetMapping("/getallwaiting")
 	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllWaitingAppointments(){

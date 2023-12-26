@@ -1,8 +1,10 @@
 package com.emrecan.appointmentsystem.business.concretes;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.emrecan.appointmentsystem.business.responses.staffCareService.GetAllStaffCareServicesResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -151,6 +153,7 @@ public class AppointmentManager implements AppointmentService{
 	public Result add(CreateAppointmentRequest createAppointmentRequest) {
 		Appointment appointment = this._modelMapperService.forRequest().map(createAppointmentRequest, Appointment.class);
 		this._appointmentDao.save(appointment);
+		System.out.println(appointment.getStaff().getFirstName());
 		return new SuccessResult(Messages.EntityAdded);
 	}
 
@@ -200,6 +203,24 @@ public class AppointmentManager implements AppointmentService{
 		appointment.setStatus(Status.CANCELLED);
 		this._appointmentDao.save(appointment);
 		return new SuccessResult(Messages.EntityUpdated);
+	}
+
+	//Test
+	public void getNextAvailableHour(){
+		DataResult<List<GetAllAppointmentsResponse>> appointments = this.getAllWaitingAppointments();
+		int lastIndex = appointments.getData().size()-1;
+		GetAllAppointmentsResponse testAppointment = appointments.getData().get(lastIndex);
+
+		int totalCareMinutes = 0;
+		for(GetAllStaffCareServicesResponse staffCareService : testAppointment.getStaffCareServices()){
+			totalCareMinutes += staffCareService.getCareServiceDuration();
+		}
+		System.out.println("TOTAL CARE MINUTES: " + totalCareMinutes);
+		System.out.println("APPOINTMENT DATE: " + testAppointment.getAppointmentDate());
+		LocalDateTime nextAvailableHour = testAppointment.getAppointmentDate().plusMinutes(totalCareMinutes);
+		System.out.println("NEXT AVAILABLE HOUR: " + nextAvailableHour);
+
+
 	}
 
 
