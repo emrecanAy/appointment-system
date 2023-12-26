@@ -28,9 +28,11 @@ import java.util.stream.Collectors;
 @Service
 public class StaffCareServiceManager implements StaffCareServiceService {
 
-    @Autowired
+
     private final StaffCareServiceDao _staffCareServiceDao;
     private final ModelMapperService _modelMapperService;
+
+    @Autowired
     public StaffCareServiceManager(StaffCareServiceDao staffCareServiceDao, ModelMapperService modelMapperService) {
         this._staffCareServiceDao = staffCareServiceDao;
         this._modelMapperService = modelMapperService;

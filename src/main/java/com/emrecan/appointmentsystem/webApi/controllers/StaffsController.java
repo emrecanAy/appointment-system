@@ -39,9 +39,9 @@ public class StaffsController {
 	public ResponseEntity<DataResult<GetStaffResponse>> getById(@PathVariable(name = "staffId") String staffId) {
 		DataResult<GetStaffResponse> staff = this._staffService.getById(staffId);
 		if(staff.isSuccess()) {
-			return new ResponseEntity<DataResult<GetStaffResponse>>(staff, HttpStatus.OK);
+			return new ResponseEntity<>(staff, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<GetStaffResponse>>(staff, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(staff, HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -49,9 +49,9 @@ public class StaffsController {
 	public ResponseEntity<DataResult<GetStaffResponse>> getByEmail(@PathVariable(name = "email") String email) {
 		DataResult<GetStaffResponse> staff = this._staffService.getByEmail(email);
 		if(staff.isSuccess()) {
-			return new ResponseEntity<DataResult<GetStaffResponse>>(staff, HttpStatus.OK);
+			return new ResponseEntity<>(staff, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<GetStaffResponse>>(staff, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(staff, HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -59,9 +59,9 @@ public class StaffsController {
 	public ResponseEntity<DataResult<List<GetAllStaffResponse>>> getAll(){
 		DataResult<List<GetAllStaffResponse>> staffs = this._staffService.getAll(); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<GetAllStaffResponse>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<GetAllStaffResponse>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -69,9 +69,9 @@ public class StaffsController {
 	public ResponseEntity<DataResult<List<GetAllStaffResponse>>> getAllDeletedStaff(){
 		DataResult<List<GetAllStaffResponse>> staffs = this._staffService.getAllDeletedStaffs(); 
 		if(staffs.isSuccess()) {
-			return new ResponseEntity<DataResult<List<GetAllStaffResponse>>>(staffs, HttpStatus.OK);
+			return new ResponseEntity<>(staffs, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<GetAllStaffResponse>>>(staffs, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -79,9 +79,9 @@ public class StaffsController {
 	public ResponseEntity<Result> add(@RequestBody CreateStaffRequest createStaffRequest) {
 		Result result = this._staffService.add(createStaffRequest); 
 		if(result.isSuccess()) {
-			return new ResponseEntity<Result>(result, HttpStatus.OK);
+			return new ResponseEntity<>(result, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -89,9 +89,9 @@ public class StaffsController {
 	public ResponseEntity<Result> update(@RequestBody UpdateStaffRequest updateStaffRequest) {
 		Result result = this._staffService.update(updateStaffRequest); 
 		if(result.isSuccess()) {
-			return new ResponseEntity<Result>(result, HttpStatus.OK);
+			return new ResponseEntity<>(result, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -100,9 +100,9 @@ public class StaffsController {
 		Result result = this._staffService.delete(deleteStaffRequest); 
 		if(result.isSuccess()) {
 			result.setMessage(Messages.EntityDeleted);
-			return new ResponseEntity<Result>(result, HttpStatus.OK);
+			return new ResponseEntity<>(result, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
