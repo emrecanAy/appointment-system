@@ -62,6 +62,10 @@ public class Staff implements IEntity {
 	@JsonIgnore
 	private StaffConfig staffConfig;
 
+	@OneToOne(mappedBy = "staff")
+	@JsonIgnore
+	private Permission permission;
+
 	@Column(name = "created_at")
 	private final LocalDateTime createdAt = LocalDateTime.now();
 	
