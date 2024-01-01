@@ -244,6 +244,16 @@ public class AppointmentsController {
 			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
+
+	@GetMapping("/check-total-earning/{staffId}")
+	public ResponseEntity<Result> checkAppointmentsAndGetTotalEarningByStaff(@PathVariable(name = "staffId") String staffId){
+		Result result = this._appointmentService.checkAppointmentsAndGetTotalEarningByStaff(staffId);
+		if(result.isSuccess()) {
+			return new ResponseEntity<>(result, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	
 	

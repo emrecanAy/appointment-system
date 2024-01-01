@@ -48,7 +48,7 @@ public class Permission {
     @Column(name = "permission_status")
     private Status permissionStatus = Status.WAITING;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "staff_id", nullable = false, insertable = false, updatable = false)
     private Staff staff;
 

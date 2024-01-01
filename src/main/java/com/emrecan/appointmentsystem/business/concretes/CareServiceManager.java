@@ -37,7 +37,7 @@ public class CareServiceManager implements CareServiceService{
 	public DataResult<GetCareServiceResponse> getById(String careServiceId) {
 		CareService careService = this._careServiceDao.getByCareServiceId(careServiceId);
 		GetCareServiceResponse careServiceResponse = this._modelMapperService.forResponse().map(careService, GetCareServiceResponse.class);
-		return new SuccessDataResult<GetCareServiceResponse>(careServiceResponse, Messages.EntityListed);
+		return new SuccessDataResult<>(careServiceResponse, Messages.EntityListed);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class CareServiceManager implements CareServiceService{
 		List<GetAllCareServicesResponse> careServicesResponse = careServices.stream()
 				.map(careService->this._modelMapperService.forResponse().map(careService, GetAllCareServicesResponse.class)).collect(Collectors.toList());
 		
-		return new SuccessDataResult<List<GetAllCareServicesResponse>>(careServicesResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(careServicesResponse, Messages.EntitiesListed);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class CareServiceManager implements CareServiceService{
 		List<CareService> careServices = this._careServiceDao.getAllCareServicesByIsDeleted(true);
 		List<GetAllCareServicesResponse> careServicesResponse = careServices.stream()
 				.map(careService->this._modelMapperService.forResponse().map(careService, GetAllCareServicesResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllCareServicesResponse>>(careServicesResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(careServicesResponse, Messages.EntitiesListed);
 	}
 
 	@Override
@@ -74,9 +74,7 @@ public class CareServiceManager implements CareServiceService{
 
 	@Override
 	public Result delete(DeleteCareServiceRequest deleteCareServiceRequest) {
-		CareService careService = this._modelMapperService.forRequest().map(deleteCareServiceRequest, CareService.class);
-		careService.setDeleted(true);
-		this._careServiceDao.save(careService);
+		this._careServiceDao.deleteByCareServiceId(deleteCareServiceRequest.getCareServiceId());
 		return new SuccessResult(Messages.EntityDeleted);
 	}
 	

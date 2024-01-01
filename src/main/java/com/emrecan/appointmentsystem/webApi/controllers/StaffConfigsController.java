@@ -90,7 +90,7 @@ public class StaffConfigsController {
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
     }
-    @DeleteMapping("/delete")
+    @PutMapping("/delete")
     public ResponseEntity<Result> delete(@RequestBody DeleteStaffConfigRequest deleteStaffConfigRequest) {
         Result result = this._staffConfigService.delete(deleteStaffConfigRequest);
         if(result.isSuccess()) {

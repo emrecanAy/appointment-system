@@ -81,8 +81,7 @@ public class StaffConfigManager implements StaffConfigService {
 
     @Override
     public Result delete(DeleteStaffConfigRequest deleteStaffConfigRequest) {
-        StaffConfig staffConfig = this._modelMapperService.forRequest().map(deleteStaffConfigRequest, StaffConfig.class);
-        this._staffConfigDao.deleteByStaffConfigId(staffConfig.getStaffConfigId());
+       this._staffConfigDao.deleteByStaffConfigId(deleteStaffConfigRequest.getStaffConfigId());
         return new SuccessResult(Messages.EntityDeleted);
     }
 }

@@ -46,14 +46,14 @@ public class AppointmentManager implements AppointmentService{
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAll() {
-		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByIsDeleted(false);
+		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsAndByIsDeletedOrderByAppointmentDateDesc(false);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
 		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllDeletedAppointments() {
-		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByIsDeleted(true);
+		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsAndByIsDeletedOrderByAppointmentDateDesc(true);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
 		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
@@ -166,42 +166,32 @@ public class AppointmentManager implements AppointmentService{
 
 	@Override
 	public Result delete(DeleteAppointmentRequest deleteAppointmentRequest) {
-		Appointment appointment = this._modelMapperService.forRequest().map(deleteAppointmentRequest, Appointment.class);
-		appointment.setDeleted(true);
-		this._appointmentDao.save(appointment);
+		this._appointmentDao.deleteByAppointmentId(deleteAppointmentRequest.getAppointmentId());
 		return new SuccessResult(Messages.EntityDeleted);
 		
 	}
 
 	@Override
 	public Result setStatusAccepted(SetAppointmentStatusRequest setAppointmentStatusRequest) {
-		Appointment appointment = this._modelMapperService.forRequest().map(setAppointmentStatusRequest, Appointment.class);
-		appointment.setStatus(Status.ACCEPTED);
-		this._appointmentDao.save(appointment);
+		this._appointmentDao.setStatusAccepted(setAppointmentStatusRequest.getAppointmentId());
 		return new SuccessResult(Messages.EntityUpdated);
 	}
 
 	@Override
 	public Result setStatusDeclined(SetAppointmentStatusRequest setAppointmentStatusRequest) {
-		Appointment appointment = this._modelMapperService.forRequest().map(setAppointmentStatusRequest, Appointment.class);
-		appointment.setStatus(Status.DECLINED);
-		this._appointmentDao.save(appointment);
+		this._appointmentDao.setStatusDeclined(setAppointmentStatusRequest.getAppointmentId());
 		return new SuccessResult(Messages.EntityUpdated);
 	}
 
 	@Override
 	public Result setStatusWaiting(SetAppointmentStatusRequest setAppointmentStatusRequest) {
-		Appointment appointment = this._modelMapperService.forRequest().map(setAppointmentStatusRequest, Appointment.class);
-		appointment.setStatus(Status.WAITING);
-		this._appointmentDao.save(appointment);
+		this._appointmentDao.setStatusWaiting(setAppointmentStatusRequest.getAppointmentId());
 		return new SuccessResult(Messages.EntityUpdated);
 	}
 
 	@Override
 	public Result setStatusCancelled(SetAppointmentStatusRequest setAppointmentStatusRequest) {
-		Appointment appointment = this._modelMapperService.forRequest().map(setAppointmentStatusRequest, Appointment.class);
-		appointment.setStatus(Status.CANCELLED);
-		this._appointmentDao.save(appointment);
+		this._appointmentDao.setStatusCancelled(setAppointmentStatusRequest.getAppointmentId());
 		return new SuccessResult(Messages.EntityUpdated);
 	}
 
@@ -220,6 +210,18 @@ public class AppointmentManager implements AppointmentService{
 		LocalDateTime nextAvailableHour = testAppointment.getAppointmentDate().plusMinutes(totalCareMinutes);
 		System.out.println("NEXT AVAILABLE HOUR: " + nextAvailableHour);
 
+	}
+
+	@Override
+	public Result checkAppointmentsAndGetTotalEarningByStaff(String staffId){
+
+		double totalEarning = 0;
+		for(GetAllAppointmentsResponse appointmentResponse : this.getAllAcceptedAppointmentsByStaff(staffId).getData()){
+			for(GetAllStaffCareServicesResponse staffCareServiceResponse : appointmentResponse.getStaffCareServices()){
+				totalEarning += staffCareServiceResponse.getCareServicePrice();
+			}
+		}
+		return new SuccessDataResult<>(totalEarning, Messages.EntityListed);
 
 	}
 

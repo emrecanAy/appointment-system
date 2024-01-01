@@ -37,28 +37,28 @@ public class CustomerManager implements CustomerService {
 	public DataResult<GetCustomerResponse> getById(String customerId) {
 		Customer customer = this._customerDao.getCustomerByCustomerId(customerId);
 		GetCustomerResponse customerResponse = this._modelMapperService.forResponse().map(customer, GetCustomerResponse.class);
-		return new SuccessDataResult<GetCustomerResponse>(customerResponse, Messages.EntityListed);
+		return new SuccessDataResult<>(customerResponse, Messages.EntityListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllCustomersResponse>> getAll() {
 		List<Customer> customers = this._customerDao.getAllCustomersByIsDeleted(false);
 		List<GetAllCustomersResponse> customersResponse = customers.stream().map(customer->this._modelMapperService.forResponse().map(customer, GetAllCustomersResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllCustomersResponse>>(customersResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(customersResponse, Messages.EntitiesListed);
 	}
 	
 	@Override
 	public DataResult<List<GetAllCustomersResponse>> getAllDeletedCustomers() {
 		List<Customer> customers = this._customerDao.getAllCustomersByIsDeleted(true);
 		List<GetAllCustomersResponse> customersResponse = customers.stream().map(customer->this._modelMapperService.forResponse().map(customer, GetAllCustomersResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllCustomersResponse>>(customersResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(customersResponse, Messages.EntitiesListed);
 	}
 	
 	@Override
 	public DataResult<GetCustomerResponse> getByEmail(String email){
 		Customer customer = this._customerDao.getCustomerByEmail(email);
 		GetCustomerResponse customerResponse = this._modelMapperService.forResponse().map(customer, GetCustomerResponse.class);
-		return new SuccessDataResult<GetCustomerResponse>(customerResponse, Messages.EntityListed);
+		return new SuccessDataResult<>(customerResponse, Messages.EntityListed);
 	}
 
 	@Override
@@ -77,9 +77,7 @@ public class CustomerManager implements CustomerService {
 
 	@Override
 	public Result delete(DeleteCustomerRequest deleteCustomerRequest) {
-		Customer customer = this._modelMapperService.forRequest().map(deleteCustomerRequest, Customer.class);
-		customer.setDeleted(true);
-		this._customerDao.save(customer);
+		this._customerDao.deleteByCustomerId(deleteCustomerRequest.getCustomerId());
 		return new SuccessResult(Messages.EntityDeleted);
 	}
 

@@ -110,7 +110,7 @@ public class StaffCareServicesController {
         }
     }
 
-    @DeleteMapping("/delete")
+    @PutMapping("/delete")
     public ResponseEntity<Result> delete(@RequestBody DeleteStaffCareServiceRequest deleteStaffCareServiceRequest) {
         Result result = this._staffCareServiceService.delete(deleteStaffCareServiceRequest);
         if(result.isSuccess()) {

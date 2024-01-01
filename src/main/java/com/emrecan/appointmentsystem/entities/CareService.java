@@ -35,6 +35,9 @@ public class CareService implements IEntity {
 	@Column(name = "care_service_description")
 	private String careServiceDescription;
 
+	@Column(name = "care_service_image_path")
+	private String imagePath;
+
 	@OneToMany(mappedBy = "careService")
 	@JsonIgnore
 	private List<StaffCareService> staffCareServices;

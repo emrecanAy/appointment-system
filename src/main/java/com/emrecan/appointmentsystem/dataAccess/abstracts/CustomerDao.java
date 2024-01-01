@@ -5,11 +5,20 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.emrecan.appointmentsystem.entities.Customer;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import javax.transaction.Transactional;
 
 public interface CustomerDao extends JpaRepository<Customer, String>{
 
-	public Customer getCustomerByCustomerId(String customerId);
-	public Customer getCustomerByEmail(String email);
-	public List<Customer> getAllCustomersByIsDeleted(boolean isDeleted);
+	Customer getCustomerByCustomerId(String customerId);
+	Customer getCustomerByEmail(String email);
+	List<Customer> getAllCustomersByIsDeleted(boolean isDeleted);
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query("update Customer c set c.isDeleted = true where c.customerId=:customerId")
+	void deleteByCustomerId(@Param("customerId") String customerId);
 	
 }

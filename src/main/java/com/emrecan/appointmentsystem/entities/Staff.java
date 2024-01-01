@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.emrecan.appointmentsystem.entities.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import com.emrecan.appointmentsystem.core.entities.IEntity;
@@ -43,12 +44,18 @@ public class Staff implements IEntity {
 	
 	@Column(name = "phone_number")
 	private String phoneNumber;
+
+	@Column(name = "gender")
+	private Gender gender;
 	
 	@Column(name = "user_name")
 	private String userName;
 	
 	@Column(name = "password")
 	private String password;
+
+	@Column(name = "image_path")
+	private String imagePath;
 
 	@OneToMany(mappedBy = "staff")
 	@JsonIgnore
@@ -62,9 +69,9 @@ public class Staff implements IEntity {
 	@JsonIgnore
 	private StaffConfig staffConfig;
 
-	@OneToOne(mappedBy = "staff")
+	@OneToMany(mappedBy = "staff")
 	@JsonIgnore
-	private Permission permission;
+	private List<Permission> permissions;
 
 	@Column(name = "created_at")
 	private final LocalDateTime createdAt = LocalDateTime.now();

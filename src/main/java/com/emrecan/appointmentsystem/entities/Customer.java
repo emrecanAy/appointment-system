@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.emrecan.appointmentsystem.entities.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -40,6 +41,9 @@ public class Customer implements IEntity {
 	
 	@Column(name = "phone_number")
 	private String phoneNumber;
+
+	@Column(name = "gender")
+	private Gender gender;
 	
 	@Column(name = "user_name")
 	private String userName;

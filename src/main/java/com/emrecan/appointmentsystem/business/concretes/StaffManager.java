@@ -38,28 +38,28 @@ public class StaffManager implements StaffService {
 		
 		Staff staff = this._staffDao.getStaffByStaffId(staffId);
 		GetStaffResponse staffResponse = this._modelMapperService.forResponse().map(staff, GetStaffResponse.class);
-		return new SuccessDataResult<GetStaffResponse>(staffResponse, Messages.EntityListed);
+		return new SuccessDataResult<>(staffResponse, Messages.EntityListed);
 	}
 
 	@Override
 	public DataResult<GetStaffResponse> getByEmail(String email) {
 		Staff staff = this._staffDao.getStaffByEmail(email);
 		GetStaffResponse staffResponse = this._modelMapperService.forResponse().map(staff, GetStaffResponse.class);
-		return new SuccessDataResult<GetStaffResponse>(staffResponse, Messages.EntityListed);
+		return new SuccessDataResult<>(staffResponse, Messages.EntityListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllStaffResponse>> getAll() {
 		List<Staff> staffs = this._staffDao.getAllByIsDeleted(false);
 		List<GetAllStaffResponse> staffsResponse = staffs.stream().map(staff->this._modelMapperService.forResponse().map(staff, GetAllStaffResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllStaffResponse>>(staffsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(staffsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllStaffResponse>> getAllDeletedStaffs() {
 		List<Staff> staffs = this._staffDao.getAllByIsDeleted(true);
 		List<GetAllStaffResponse> staffsResponse = staffs.stream().map(staff->this._modelMapperService.forResponse().map(staff, GetAllStaffResponse.class)).collect(Collectors.toList());
-		return new SuccessDataResult<List<GetAllStaffResponse>>(staffsResponse, Messages.EntitiesListed);
+		return new SuccessDataResult<>(staffsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
@@ -78,9 +78,7 @@ public class StaffManager implements StaffService {
 
 	@Override
 	public Result delete(DeleteStaffRequest deleteStaffRequest) {
-		Staff staff = this._modelMapperService.forRequest().map(deleteStaffRequest, Staff.class);
-		staff.setDeleted(true);
-		this._staffDao.save(staff);
+		this._staffDao.deleteByStaffId(deleteStaffRequest.getStaffId());
 		return new SuccessResult(Messages.EntityDeleted);
 	}
 

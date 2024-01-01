@@ -36,5 +36,7 @@ public interface AppointmentService {
 	Result setStatusDeclined(SetAppointmentStatusRequest setAppointmentStatusRequest);
 	Result setStatusWaiting(SetAppointmentStatusRequest setAppointmentStatusRequest);
 	Result setStatusCancelled(SetAppointmentStatusRequest setAppointmentStatusRequest);
+	Result checkAppointmentsAndGetTotalEarningByStaff(String staffId);
+
 
 }

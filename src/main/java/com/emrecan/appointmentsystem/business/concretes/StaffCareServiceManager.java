@@ -96,8 +96,7 @@ public class StaffCareServiceManager implements StaffCareServiceService {
 
     @Override
     public Result delete(DeleteStaffCareServiceRequest deleteStaffCareServiceRequest) {
-        StaffCareService staffCareService = this._modelMapperService.forRequest().map(deleteStaffCareServiceRequest, StaffCareService.class);
-        this._staffCareServiceDao.deleteByStaffCareServiceId(staffCareService.getStaffCareServiceId());
+        this._staffCareServiceDao.deleteByStaffCareServiceId(deleteStaffCareServiceRequest.getStaffCareServiceId());
         return new SuccessResult(Messages.EntityDeleted);
     }
 }

@@ -46,14 +46,14 @@ public class PermissionManager implements PermissionService {
     }
     @Override
     public DataResult<List<GetAllPermissionsResponse>> getAll() {
-        List<Permission> permissions = this._permissionDao.getAllByIsDeleted(false);
+        List<Permission> permissions = this._permissionDao.getAllByIsDeletedAndOrderByPermissionDateDesc(false);
         List<GetAllPermissionsResponse> permissionsResponse = permissions.stream().map(permission->this._modelMapperService.forResponse().map(permission, GetAllPermissionsResponse.class)).collect(Collectors.toList());
         return new SuccessDataResult<>(permissionsResponse, Messages.EntitiesListed);
     }
 
     @Override
     public DataResult<List<GetAllPermissionsResponse>> getAllDeleted() {
-        List<Permission> permissions = this._permissionDao.getAllByIsDeleted(true);
+        List<Permission> permissions = this._permissionDao.getAllByIsDeletedAndOrderByPermissionDateDesc(true);
         List<GetAllPermissionsResponse> permissionsResponse = permissions.stream().map(permission->this._modelMapperService.forResponse().map(permission, GetAllPermissionsResponse.class)).collect(Collectors.toList());
         return new SuccessDataResult<>(permissionsResponse, Messages.EntitiesListed);
     }
@@ -137,9 +137,7 @@ public class PermissionManager implements PermissionService {
 
     @Override
     public Result delete(DeletePermissionRequest deletePermissionRequest) {
-        Permission permission = this._modelMapperService.forRequest().map(deletePermissionRequest, Permission.class);
-        permission.setDeleted(false);
-        this._permissionDao.save(permission);
+        this._permissionDao.deleteByPermissionId(deletePermissionRequest.getPermissionId());
         return new SuccessResult(Messages.EntityDeleted);
     }
 

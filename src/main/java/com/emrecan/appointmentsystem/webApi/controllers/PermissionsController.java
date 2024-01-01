@@ -173,7 +173,7 @@ public class PermissionsController {
         }
     }
 
-    @DeleteMapping("/delete")
+    @PutMapping("/delete")
     public ResponseEntity<Result> delete(@RequestBody DeletePermissionRequest deletePermissionRequest){
         Result result = this._permissionService.delete(deletePermissionRequest);
         if (result.isSuccess()){

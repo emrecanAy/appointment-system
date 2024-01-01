@@ -11,6 +11,5 @@ public class CreateCareServiceRequest {
 
 	private String careServiceName;
 	private String careServiceDescription;
-	private double careServicePrice;
-	
+	private String imagePath;
 }
