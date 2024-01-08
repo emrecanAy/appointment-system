@@ -39,9 +39,9 @@ public class CustomersController {
 	public ResponseEntity<DataResult<GetCustomerResponse>> getById(@PathVariable(name = "customerId") String customerId) {
 		DataResult<GetCustomerResponse> customer = this._customerService.getById(customerId);
 		if(customer.isSuccess()) {
-			return new ResponseEntity<DataResult<GetCustomerResponse>>(customer, HttpStatus.OK);
+			return new ResponseEntity<>(customer, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<GetCustomerResponse>>(customer, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(customer, HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -49,9 +49,19 @@ public class CustomersController {
 	public ResponseEntity<DataResult<GetCustomerResponse>> getByEmail(@PathVariable(name = "email") String email) {
 		DataResult<GetCustomerResponse> customer = this._customerService.getByEmail(email);
 		if(customer.isSuccess()) {
-			return new ResponseEntity<DataResult<GetCustomerResponse>>(customer, HttpStatus.OK);
+			return new ResponseEntity<>(customer, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<GetCustomerResponse>>(customer, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(customer, HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping("/username/{username}")
+	public ResponseEntity<DataResult<GetCustomerResponse>> getByUsername(@PathVariable(name = "username") String username) {
+		DataResult<GetCustomerResponse> customer = this._customerService.getByUsername(username);
+		if(customer.isSuccess()) {
+			return new ResponseEntity<>(customer, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(customer, HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -59,9 +69,9 @@ public class CustomersController {
 	public ResponseEntity<DataResult<List<GetAllCustomersResponse>>> getAll(){
 		DataResult<List<GetAllCustomersResponse>> customers = this._customerService.getAll(); 
 		if(customers.isSuccess()) {
-			return new ResponseEntity<DataResult<List<GetAllCustomersResponse>>>(customers, HttpStatus.OK);
+			return new ResponseEntity<>(customers, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<GetAllCustomersResponse>>>(customers, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(customers, HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -69,9 +79,9 @@ public class CustomersController {
 	public ResponseEntity<DataResult<List<GetAllCustomersResponse>>> getAllDeletedCustomers(){
 		DataResult<List<GetAllCustomersResponse>> customers = this._customerService.getAllDeletedCustomers(); 
 		if(customers.isSuccess()) {
-			return new ResponseEntity<DataResult<List<GetAllCustomersResponse>>>(customers, HttpStatus.OK);
+			return new ResponseEntity<>(customers, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DataResult<List<GetAllCustomersResponse>>>(customers, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(customers, HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -79,9 +89,9 @@ public class CustomersController {
 	public ResponseEntity<Result> add(@RequestBody CreateCustomerRequest createCustomerRequest) {
 		Result result = this._customerService.add(createCustomerRequest); 
 		if(result.isSuccess()) {
-			return new ResponseEntity<Result>(result, HttpStatus.OK);
+			return new ResponseEntity<>(result, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -89,9 +99,9 @@ public class CustomersController {
 	public ResponseEntity<Result> update(@RequestBody UpdateCustomerRequest updateCustomerRequest) {
 		Result result = this._customerService.update(updateCustomerRequest);
 		if(result.isSuccess()) {
-			return new ResponseEntity<Result>(result, HttpStatus.OK);
+			return new ResponseEntity<>(result, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -100,9 +110,9 @@ public class CustomersController {
 		Result result = this._customerService.delete(deleteCustomerRequest);
 		if(result.isSuccess()) {
 			result.setMessage(Messages.EntityDeleted);
-			return new ResponseEntity<Result>(result, HttpStatus.OK);
+			return new ResponseEntity<>(result, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
 		}
 	}
 	

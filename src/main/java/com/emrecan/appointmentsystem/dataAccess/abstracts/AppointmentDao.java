@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 public interface AppointmentDao extends JpaRepository<Appointment, String>{
 
 	Appointment getAppointmentByAppointmentId(String appointmentId);
-	List<Appointment> getAllAppointmentsAndByIsDeletedOrderByAppointmentDateDesc(boolean isDeleted);
+	List<Appointment> getAllAppointmentsByIsDeletedOrderByAppointmentDateDesc(boolean isDeleted);
 	List<Appointment> getAllAppointmentsByStatusIs(Status status);
 	List<Appointment> getAllAppointmentsByIsDeletedFalseAndStatusIs(Status status);
 	List<Appointment> getAllAppointmentsByStaffIdAndIsDeletedTrue(String staffId);

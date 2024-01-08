@@ -46,14 +46,14 @@ public class PermissionManager implements PermissionService {
     }
     @Override
     public DataResult<List<GetAllPermissionsResponse>> getAll() {
-        List<Permission> permissions = this._permissionDao.getAllByIsDeletedAndOrderByPermissionDateDesc(false);
+        List<Permission> permissions = this._permissionDao.getAllPermissionsByIsDeletedOrderByPermissionDateDesc(false);
         List<GetAllPermissionsResponse> permissionsResponse = permissions.stream().map(permission->this._modelMapperService.forResponse().map(permission, GetAllPermissionsResponse.class)).collect(Collectors.toList());
         return new SuccessDataResult<>(permissionsResponse, Messages.EntitiesListed);
     }
 
     @Override
     public DataResult<List<GetAllPermissionsResponse>> getAllDeleted() {
-        List<Permission> permissions = this._permissionDao.getAllByIsDeletedAndOrderByPermissionDateDesc(true);
+        List<Permission> permissions = this._permissionDao.getAllPermissionsByIsDeletedOrderByPermissionDateDesc(true);
         List<GetAllPermissionsResponse> permissionsResponse = permissions.stream().map(permission->this._modelMapperService.forResponse().map(permission, GetAllPermissionsResponse.class)).collect(Collectors.toList());
         return new SuccessDataResult<>(permissionsResponse, Messages.EntitiesListed);
     }

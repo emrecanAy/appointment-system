@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface PermissionDao extends JpaRepository<Permission, String> {
     Permission getPermissionByPermissionId(String permissionId);
-    List<Permission> getAllByIsDeletedAndOrderByPermissionDateDesc(boolean isDeleted);
+    List<Permission> getAllPermissionsByIsDeletedOrderByPermissionDateDesc(boolean isDeleted);
     List<Permission> getAllByIsDeletedFalseAndPermissionStatusIs(Status status);
     List<Permission> getAllByStaffIdAndIsDeleted(String staffId, boolean isDeleted);
     List<Permission> getAllByIsDeletedFalseAndStaffIdAndAndPermissionStatusIs(String staffId, Status status);

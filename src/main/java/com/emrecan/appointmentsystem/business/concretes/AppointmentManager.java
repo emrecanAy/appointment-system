@@ -46,14 +46,14 @@ public class AppointmentManager implements AppointmentService{
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAll() {
-		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsAndByIsDeletedOrderByAppointmentDateDesc(false);
+		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByIsDeletedOrderByAppointmentDateDesc(false);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
 		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}
 
 	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllDeletedAppointments() {
-		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsAndByIsDeletedOrderByAppointmentDateDesc(true);
+		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByIsDeletedOrderByAppointmentDateDesc(true);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
 		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
 	}

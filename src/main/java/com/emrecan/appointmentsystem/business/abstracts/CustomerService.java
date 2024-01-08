@@ -14,6 +14,7 @@ public interface CustomerService {
 
 	DataResult<GetCustomerResponse> getById(String id);
 	DataResult<GetCustomerResponse> getByEmail(String email);
+	DataResult<GetCustomerResponse> getByUsername(String userName);
 	DataResult<List<GetAllCustomersResponse>> getAll();
 	DataResult<List<GetAllCustomersResponse>> getAllDeletedCustomers();
 	Result add(CreateCustomerRequest createCustomerRequest);

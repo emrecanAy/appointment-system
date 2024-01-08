@@ -15,6 +15,7 @@ public interface CustomerDao extends JpaRepository<Customer, String>{
 
 	Customer getCustomerByCustomerId(String customerId);
 	Customer getCustomerByEmail(String email);
+	Customer getCustomerByUserName(String userName);
 	List<Customer> getAllCustomersByIsDeleted(boolean isDeleted);
 	@Transactional
 	@Modifying(clearAutomatically = true)
