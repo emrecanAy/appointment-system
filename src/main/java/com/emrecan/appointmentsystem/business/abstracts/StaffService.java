@@ -14,6 +14,7 @@ public interface StaffService {
 
 	DataResult<GetStaffResponse> getById(String staffId);
 	DataResult<GetStaffResponse> getByEmail(String email);
+	DataResult<GetStaffResponse> getByEmailAndPassword(String email, String password);
 	DataResult<List<GetAllStaffResponse>> getAll();
 	DataResult<List<GetAllStaffResponse>> getAllDeletedStaffs();
 	Result add(CreateStaffRequest createStaffRequest);

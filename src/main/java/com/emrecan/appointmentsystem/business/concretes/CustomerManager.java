@@ -69,6 +69,13 @@ public class CustomerManager implements CustomerService {
 	}
 
 	@Override
+	public DataResult<GetCustomerResponse> getByEmailAndPassword(String email, String password) {
+		Customer customer = this._customerDao.getCustomerByEmailAndPassword(email, password);
+		GetCustomerResponse customerResponse = this._modelMapperService.forResponse().map(customer, GetCustomerResponse.class);
+		return new SuccessDataResult<>(customerResponse, Messages.EntityListed);
+	}
+
+	@Override
 	public Result add(CreateCustomerRequest createCustomerRequest) {
 		Customer customer = this._modelMapperService.forRequest().map(createCustomerRequest, Customer.class);
 		this._customerDao.save(customer);

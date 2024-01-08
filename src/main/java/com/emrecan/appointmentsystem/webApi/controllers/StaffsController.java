@@ -5,13 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.emrecan.appointmentsystem.business.abstracts.StaffService;
 import com.emrecan.appointmentsystem.business.constants.Messages;
@@ -47,6 +41,15 @@ public class StaffsController {
 	@GetMapping("/email/{email}")
 	public ResponseEntity<DataResult<GetStaffResponse>> getByEmail(@PathVariable(name = "email") String email) {
 		DataResult<GetStaffResponse> staff = this._staffService.getByEmail(email);
+		if(staff.isSuccess()) {
+			return new ResponseEntity<>(staff, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(staff, HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/email-password")
+	public ResponseEntity<DataResult<GetStaffResponse>> getByEmailAndPassword(@RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
+		DataResult<GetStaffResponse> staff = this._staffService.getByEmailAndPassword(email, password);
 		if(staff.isSuccess()) {
 			return new ResponseEntity<>(staff, HttpStatus.OK);
 		}else {

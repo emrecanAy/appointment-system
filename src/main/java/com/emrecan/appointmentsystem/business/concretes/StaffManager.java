@@ -49,6 +49,13 @@ public class StaffManager implements StaffService {
 	}
 
 	@Override
+	public DataResult<GetStaffResponse> getByEmailAndPassword(String email, String password) {
+		Staff staff = this._staffDao.getStaffByEmailAndPassword(email, password);
+		GetStaffResponse staffResponse = this._modelMapperService.forResponse().map(staff, GetStaffResponse.class);
+		return new SuccessDataResult<>(staffResponse, Messages.EntityListed);
+	}
+
+	@Override
 	public DataResult<List<GetAllStaffResponse>> getAll() {
 		List<Staff> staffs = this._staffDao.getAllByIsDeleted(false);
 		List<GetAllStaffResponse> staffsResponse = staffs.stream().map(staff->this._modelMapperService.forResponse().map(staff, GetAllStaffResponse.class)).collect(Collectors.toList());
