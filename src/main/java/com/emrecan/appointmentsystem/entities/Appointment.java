@@ -37,6 +37,9 @@ public class Appointment implements IEntity {
 	
 	@Column(name = "appointment_date")
 	private LocalDateTime appointmentDate;
+
+	@Column(name = "appointment_hour")
+	private String appointmentHour;
 	
 	@Column(name = "status")
 	private Status status = Status.WAITING;

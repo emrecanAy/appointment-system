@@ -18,6 +18,7 @@ public class CreateAppointmentRequest {
 	private String customerId;
 	private String staffId;
 	private LocalDateTime appointmentDate;
+	private String appointmentHour;
 	private Status status = Status.WAITING;
 	private List<SetStaffCareServiceRequest> staffCareServices;
 	private String note;
