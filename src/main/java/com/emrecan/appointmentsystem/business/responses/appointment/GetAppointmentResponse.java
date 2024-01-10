@@ -20,6 +20,7 @@ public class GetAppointmentResponse {
 	private GetCustomerResponse customer;
 	private GetStaffResponse staff;
 	private LocalDateTime appointmentDate;
+	private int totalDuration;
 	private Status status;
 	private List<GetStaffCareServiceResponse> staffCareServices;
 	private String note;

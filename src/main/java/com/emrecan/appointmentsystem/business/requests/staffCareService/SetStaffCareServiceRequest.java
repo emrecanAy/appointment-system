@@ -15,4 +15,5 @@ import lombok.NoArgsConstructor;
 public class SetStaffCareServiceRequest {
 
     private String staffCareServiceId;
+    private int careServiceDuration;
 }

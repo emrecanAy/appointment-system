@@ -44,6 +44,9 @@ public class Appointment implements IEntity {
 	@Column(name = "note")
 	private String note;
 
+	@Column(name = "total_duration")//dakika
+	private int totalDuration;
+
 	@ManyToOne
 	@JoinColumn(name = "customer_id", nullable = false, insertable = false, updatable = false)
 	private Customer customer;

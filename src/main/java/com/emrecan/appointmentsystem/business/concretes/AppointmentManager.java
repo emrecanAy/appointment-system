@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.emrecan.appointmentsystem.business.responses.staffCareService.GetAllStaffCareServicesResponse;
+import com.emrecan.appointmentsystem.entities.StaffCareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -150,8 +151,16 @@ public class AppointmentManager implements AppointmentService{
 	}
 
 	@Override
+	public DataResult<List<GetAllAppointmentsResponse>> getAllWaitingAndAcceptedAppointmentsByStaff(String staffId) {
+		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByStaffIdAndIsDeletedFalseAndStatusIsAndStatusIs(staffId, Status.ACCEPTED, Status.WAITING);
+		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
+	}
+
+	@Override
 	public Result add(CreateAppointmentRequest createAppointmentRequest) {
 		Appointment appointment = this._modelMapperService.forRequest().map(createAppointmentRequest, Appointment.class);
+		appointment.setTotalDuration(getTotalDuration(appointment));
 		this._appointmentDao.save(appointment);
 		System.out.println(appointment.getStaff().getFirstName());
 		return new SuccessResult(Messages.EntityAdded);
@@ -212,6 +221,14 @@ public class AppointmentManager implements AppointmentService{
 
 	}
 
+	private int getTotalDuration(Appointment appointment){
+		int totalCareMinutes = 0;
+		for(StaffCareService staffCareService : appointment.getStaffCareServices()){
+			totalCareMinutes += staffCareService.getCareServiceDuration();
+		}
+
+		return totalCareMinutes;
+	}
 	@Override
 	public Result checkAppointmentsAndGetTotalEarningByStaff(String staffId){
 

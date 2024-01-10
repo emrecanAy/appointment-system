@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.emrecan.appointmentsystem.entities.enums.CustomerRole;
 import com.emrecan.appointmentsystem.entities.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
@@ -44,6 +45,9 @@ public class Customer implements IEntity {
 
 	@Column(name = "gender")
 	private Gender gender;
+
+	@Column(name = "role")
+	private CustomerRole role = CustomerRole.NORMAL_CUSTOMER;
 	
 	@Column(name = "user_name")
 	private String userName;
