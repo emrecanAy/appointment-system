@@ -20,11 +20,15 @@ public interface AppointmentDao extends JpaRepository<Appointment, String>{
 	List<Appointment> getAllAppointmentsByIsDeletedFalseAndStatusIs(Status status);
 	List<Appointment> getAllAppointmentsByStaffIdAndIsDeletedTrue(String staffId);
 	List<Appointment> getAllAppointmentsByStaffIdAndIsDeletedFalse(String staffId);
+	List<Appointment> getAllByStaffIdAndIsDeletedAndStatusIn(String staffId, boolean isDeleted, List<Status> statuses);
 	List<Appointment> getAllAppointmentsByCustomerIdAndIsDeletedTrue(String customerId);
 	List<Appointment> getAllAppointmentsByCustomerIdAndIsDeletedFalse(String customerId);
 	List<Appointment> getAllAppointmentsByStaffIdAndIsDeletedFalseAndStatusIs(String staffId, Status status);
-	List<Appointment> getAllAppointmentsByStaffIdAndIsDeletedFalseAndStatusIsAndStatusIs(String staffId, Status status1, Status status2);
 	List<Appointment> getAllAppointmentsByCustomerIdAndIsDeletedFalseAndStatusIs(String customerId, Status status);
+
+
+	//@Query("SELECT a from Appointment a WHERE a.isDeleted = false AND a.staffId=:staffId AND (a.status = 0 OR a.status = 1)")
+	//List<Appointment> getAllAppointmentsByStaffIdAndAndStatusAcceptedOrStatusWaiting(String staffId);
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
