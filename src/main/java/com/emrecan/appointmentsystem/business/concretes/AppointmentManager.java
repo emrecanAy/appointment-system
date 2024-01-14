@@ -159,6 +159,14 @@ public class AppointmentManager implements AppointmentService{
 	}
 
 	@Override
+	public DataResult<List<GetAllAppointmentsResponse>> getAllWaitingAndAcceptedAppointments() {
+		List<Status> statusList = List.of(Status.ACCEPTED, Status.WAITING);
+		List<Appointment> appointments = this._appointmentDao.getAllByIsDeletedAndStatusIn(false, statusList);
+		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
+	}
+
+	@Override
 	public Result add(CreateAppointmentRequest createAppointmentRequest) {
 		Appointment appointment = this._modelMapperService.forRequest().map(createAppointmentRequest, Appointment.class);
 		appointment.setTotalDuration(getTotalDuration(appointment));

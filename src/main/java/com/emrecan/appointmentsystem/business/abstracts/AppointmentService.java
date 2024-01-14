@@ -30,6 +30,7 @@ public interface AppointmentService {
 	DataResult<List<GetAllAppointmentsResponse>> getAllAcceptedAppointmentsByCustomer(String customerId);
 	DataResult<List<GetAllAppointmentsResponse>> getAllDeclinedAppointmentsByCustomer(String customerId);
 	DataResult<List<GetAllAppointmentsResponse>> getAllWaitingAndAcceptedAppointmentsByStaff(String staffId);
+	DataResult<List<GetAllAppointmentsResponse>> getAllWaitingAndAcceptedAppointments();
 	Result add(CreateAppointmentRequest createAppointmentRequest);
 	Result update(UpdateAppointmentRequest updateAppointmentRequest);
 	Result delete(DeleteAppointmentRequest deleteAppointmentRequest);

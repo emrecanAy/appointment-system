@@ -144,6 +144,15 @@ public class AppointmentsController {
 			return new ResponseEntity<>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
+	@GetMapping("/getallwaitingandacceptedappointments")
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllWaitingAndAcceptedAppointments(){
+		DataResult<List<GetAllAppointmentsResponse>> staffs = this._appointmentService.getAllWaitingAndAcceptedAppointments();
+		if(staffs.isSuccess()) {
+			return new ResponseEntity<>(staffs, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(staffs, HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@GetMapping("/getallwaitingandaccepted/staff/{staffId}")
 	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllWaitingAndAcceptedAppointmentsByStaff(@PathVariable(name = "staffId") String staffId){

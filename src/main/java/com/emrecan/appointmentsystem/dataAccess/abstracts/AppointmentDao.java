@@ -21,6 +21,7 @@ public interface AppointmentDao extends JpaRepository<Appointment, String>{
 	List<Appointment> getAllAppointmentsByStaffIdAndIsDeletedTrue(String staffId);
 	List<Appointment> getAllAppointmentsByStaffIdAndIsDeletedFalse(String staffId);
 	List<Appointment> getAllByStaffIdAndIsDeletedAndStatusIn(String staffId, boolean isDeleted, List<Status> statuses);
+	List<Appointment> getAllByIsDeletedAndStatusIn(boolean isDeleted, List<Status> statuses);
 	List<Appointment> getAllAppointmentsByCustomerIdAndIsDeletedTrue(String customerId);
 	List<Appointment> getAllAppointmentsByCustomerIdAndIsDeletedFalse(String customerId);
 	List<Appointment> getAllAppointmentsByStaffIdAndIsDeletedFalseAndStatusIs(String staffId, Status status);
