@@ -102,6 +102,13 @@ public class AppointmentManager implements AppointmentService{
 	}
 
 	@Override
+	public DataResult<List<GetAllAppointmentsResponse>> getAllCancelledAppointmentsByStaff(String staffId) {
+		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByStaffIdAndIsDeletedFalseAndStatusIs(staffId, Status.CANCELLED);
+		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());
+		return new SuccessDataResult<>(appointmentsResponse, Messages.EntitiesListed);
+	}
+
+	@Override
 	public DataResult<List<GetAllAppointmentsResponse>> getAllByStaff(String staffId) {
 		List<Appointment> appointments = this._appointmentDao.getAllAppointmentsByStaffIdAndIsDeletedFalse(staffId);
 		List<GetAllAppointmentsResponse> appointmentsResponse = appointments.stream().map(appointment->this._modelMapperService.forResponse().map(appointment, GetAllAppointmentsResponse.class)).collect(Collectors.toList());

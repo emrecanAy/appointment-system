@@ -134,6 +134,15 @@ public class AppointmentsController {
 			return new ResponseEntity<>(appointments, HttpStatus.NOT_FOUND);
 		}
 	}
+	@GetMapping("/getallcancelled/{staffId}")
+	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllCancelledAppointmentsByStaff(@PathVariable(name = "staffId") String staffId){
+		DataResult<List<GetAllAppointmentsResponse>> appointments = this._appointmentService.getAllCancelledAppointmentsByStaff(staffId);
+		if(appointments.isSuccess()) {
+			return new ResponseEntity<>(appointments, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(appointments, HttpStatus.NOT_FOUND);
+		}
+	}
 	
 	@GetMapping("/getalldeclined/{staffId}")
 	public ResponseEntity<DataResult<List<GetAllAppointmentsResponse>>> getAllDeclinedAppointmentsByStaff(@PathVariable(name = "staffId") String staffId){

@@ -22,6 +22,7 @@ public interface AppointmentService {
 	DataResult<List<GetAllAppointmentsResponse>> getAllAcceptedAppointments();
 	DataResult<List<GetAllAppointmentsResponse>> getAllDeclinedAppointments();
 	DataResult<List<GetAllAppointmentsResponse>> getAllCancelledAppointments();
+	DataResult<List<GetAllAppointmentsResponse>> getAllCancelledAppointmentsByStaff(String staffId);
 	DataResult<List<GetAllAppointmentsResponse>> getAllByStaff(String staffId);
 	DataResult<List<GetAllAppointmentsResponse>> getAllByCustomer(String customerId);
 	DataResult<List<GetAllAppointmentsResponse>> getAllWaitingAppointmentsByStaff(String staffId);
