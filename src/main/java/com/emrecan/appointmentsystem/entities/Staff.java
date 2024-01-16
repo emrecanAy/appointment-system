@@ -1,6 +1,5 @@
 package com.emrecan.appointmentsystem.entities;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.*;
@@ -8,7 +7,6 @@ import javax.persistence.*;
 import com.emrecan.appointmentsystem.entities.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
-import com.emrecan.appointmentsystem.core.entities.IEntity;
 import com.emrecan.appointmentsystem.entities.enums.Role;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "staffs")
-public class Staff implements IEntity {
+public class Staff extends User {
 
 	@Id
 	@GeneratedValue(generator = "uuid-hibernate-generator")
@@ -47,12 +45,6 @@ public class Staff implements IEntity {
 
 	@Column(name = "gender")
 	private Gender gender;
-	
-	@Column(name = "user_name")
-	private String userName;
-	
-	@Column(name = "password")
-	private String password;
 
 	@Column(name = "image_path")
 	private String imagePath;
@@ -72,11 +64,4 @@ public class Staff implements IEntity {
 	@OneToMany(mappedBy = "staff")
 	@JsonIgnore
 	private List<Permission> permissions;
-
-	@Column(name = "created_at")
-	private final LocalDateTime createdAt = LocalDateTime.now();
-	
-	@Column(name = "is_deleted")
-	private boolean isDeleted = false;
-	
 }

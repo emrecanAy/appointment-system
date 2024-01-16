@@ -1,6 +1,5 @@
 package com.emrecan.appointmentsystem.entities;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.*;
@@ -10,7 +9,6 @@ import com.emrecan.appointmentsystem.entities.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
-import com.emrecan.appointmentsystem.core.entities.IEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "customers")
-public class Customer implements IEntity {
+public class Customer extends User {
 	
 	@Id
 	@GeneratedValue(generator = "uuid-hibernate-generator")
@@ -49,20 +47,8 @@ public class Customer implements IEntity {
 	@Column(name = "role")
 	private CustomerRole role = CustomerRole.NORMAL_CUSTOMER;
 	
-	@Column(name = "user_name")
-	private String userName;
-	
-	@Column(name = "password")
-	private String password;
-
 	@OneToMany(mappedBy = "customer")
 	@JsonIgnore
 	private List<Appointment> appointments;
-	
-	@Column(name = "created_at")
-	private final LocalDateTime createdAt = LocalDateTime.now();
-	
-	@Column(name = "is_deleted")
-	private boolean isDeleted = false;
 
 }

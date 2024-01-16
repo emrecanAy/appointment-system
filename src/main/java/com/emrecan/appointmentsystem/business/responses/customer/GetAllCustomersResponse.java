@@ -1,5 +1,6 @@
 package com.emrecan.appointmentsystem.business.responses.customer;
 
+import com.emrecan.appointmentsystem.entities.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ public class GetAllCustomersResponse {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private Gender gender;
 	private String phoneNumber;
 	private String userName;
 	
