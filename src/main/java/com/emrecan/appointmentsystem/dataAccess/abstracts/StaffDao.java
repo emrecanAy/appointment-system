@@ -17,6 +17,7 @@ public interface StaffDao extends JpaRepository<Staff, String>{
 	Staff getStaffByStaffId(String staffId);
 	Staff getStaffByEmail(String email);
 	Staff getStaffByEmailAndPassword(String email, String password);
+	List<Staff> findByStaffCareServices_CareService_CareServiceId(String careServiceId);
 
 	@Transactional
 	@Modifying(clearAutomatically = true)

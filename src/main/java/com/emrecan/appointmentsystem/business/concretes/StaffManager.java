@@ -70,6 +70,13 @@ public class StaffManager implements StaffService {
 	}
 
 	@Override
+	public DataResult<List<GetAllStaffResponse>> getAllByCareServiceId(String careServiceId) {
+		List<Staff> staffs = this._staffDao.findByStaffCareServices_CareService_CareServiceId(careServiceId);
+		List<GetAllStaffResponse> staffsResponse = staffs.stream().map(staff->this._modelMapperService.forResponse().map(staff, GetAllStaffResponse.class)).collect(Collectors.toList());
+		return new SuccessDataResult<>(staffsResponse, Messages.EntitiesListed);
+	}
+
+	@Override
 	public Result add(CreateStaffRequest createStaffRequest) {
 		Staff staff = this._modelMapperService.forRequest().map(createStaffRequest, Staff.class);
 		this._staffDao.save(staff);

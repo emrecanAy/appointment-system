@@ -66,8 +66,17 @@ public class StaffsController {
 			return new ResponseEntity<>(staffs, HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	@GetMapping("/getalldeletedstuff")
+
+	@GetMapping("/getall/{careServiceId}")
+	public ResponseEntity<DataResult<List<GetAllStaffResponse>>> getAllByCareServiceId(@PathVariable(name = "careServiceId") String careServiceId){
+		DataResult<List<GetAllStaffResponse>> staffs = this._staffService.getAllByCareServiceId(careServiceId);
+		if(staffs.isSuccess()) {
+			return new ResponseEntity<>(staffs, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(staffs, HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/getalldeletedstaff")
 	public ResponseEntity<DataResult<List<GetAllStaffResponse>>> getAllDeletedStaff(){
 		DataResult<List<GetAllStaffResponse>> staffs = this._staffService.getAllDeletedStaffs(); 
 		if(staffs.isSuccess()) {
